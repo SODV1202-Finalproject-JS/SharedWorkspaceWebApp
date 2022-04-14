@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Owner Search Page</title>
+ 	<!--<link rel="stylesheet" href="style.css"> -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+</head>
+<body>
+	
+<h1>Owner`s Page</h1><br><br>
+
+<h2>Search for Properties and Workspaces</h2>
+
+<form action="http://localhost:3005/user" method="POST"></form>
+<div>
+<div class="wrapper">
+	<input type="text" class="input" 
+	placeholder="building_id">
+	<div class="searchbtn"><i class="fas fa-search"></i></div>
+</div>
+<div class="wrapper">
+	<input type="text" class="input" 
+	placeholder="workspace_id">
+	<div class="searchbtn"><i class="fas fa-search"></i></div>
+</div>
+</div>
+
+<div class="wrapper">
+	<input type="text" class="input" 
+	placeholder="address">
+	<div class="searchbtn"><i class="fas fa-search"></i></div>
+</div>
+</div>
+
+<div class="wrapper">
+	<input type="text" class="input" 
+	placeholder="neighborhood">
+	<div class="searchbtn"><i class="fas fa-search"></i></div>
+</div>
+</div>
+
+<div class="wrapper">
+	<input type="text" class="input" 
+	placeholder="neighborhood">
+	<div class="searchbtn"><i class="fas fa-search"></i></div>
+</div>
+</div>
+
+<div class="wrapper">
+	<input type="text" class="input" 
+	placeholder="size">
+	<div class="searchbtn"><i class="fas fa-search"></i></div>
+</div>
+</div>
+
+
+
+
+
+</body>
+<script>
+
+
+	fetch("./user_file.json")
+	.then(function (resp) {
+		return resp.json();
+	})
+	.then(function (data) {
+		console.log(data);
+
+	});
+</script>
+</html>
