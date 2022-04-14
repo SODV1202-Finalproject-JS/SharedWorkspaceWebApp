@@ -1,74 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Owner Search Page</title>
- 	<!--<link rel="stylesheet" href="style.css"> -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<!--<link rel="stylesheet" href="style.css"> -->
 </head>
+
 <body>
-	
-<h1>Owner`s Page</h1><br><br>
 
-<h2>Search for Properties and Workspaces</h2>
+	<h1>Owner`s Page</h1><br><br>
 
-<form action="http://localhost:3005/user" method="POST"></form>
-<div>
-<div class="wrapper">
-	<input type="text" class="input" 
-	placeholder="building_id">
-	<div class="searchbtn"><i class="fas fa-search"></i></div>
-</div>
-<div class="wrapper">
-	<input type="text" class="input" 
-	placeholder="workspace_id">
-	<div class="searchbtn"><i class="fas fa-search"></i></div>
-</div>
-</div>
+	<h2>Search for Properties and Workspaces</h2>
 
-<div class="wrapper">
-	<input type="text" class="input" 
-	placeholder="address">
-	<div class="searchbtn"><i class="fas fa-search"></i></div>
-</div>
-</div>
+	<form action="http://localhost:3005/user" method="POST"></form>
+	<label for="name">Name: </label> <input type="text" name="name">
+	<br> <br> <br>
 
-<div class="wrapper">
-	<input type="text" class="input" 
-	placeholder="neighborhood">
-	<div class="searchbtn"><i class="fas fa-search"></i></div>
-</div>
-</div>
+	<label for="building_id">Building ID: </label> <input type="text" name="building_id">
+	<br> <br> <br>
 
-<div class="wrapper">
-	<input type="text" class="input" 
-	placeholder="neighborhood">
-	<div class="searchbtn"><i class="fas fa-search"></i></div>
-</div>
-</div>
+	<label for="workspace_id">Workspace ID: </label> <input type="text" name="workspace_id">
+	<br> <br> <br>
 
-<div class="wrapper">
-	<input type="text" class="input" 
-	placeholder="size">
-	<div class="searchbtn"><i class="fas fa-search"></i></div>
-</div>
-</div>
+	<label for="address">Address: </label><input type="text" name="address">
+	<br> <br> <br>
 
+	<label for="neighborhood">Neighborhood: </label><input type="text" name="neighborhood">
+	<br> <br> <br>
 
+	<label for="size">Size (square feet): </label><input type="text" name="size">
+	<br> <br> <br>
 
+	<label for="garage">Parking garage: </label>
+	<select id="garage" name="garage" class="form-control" required>
+		<option disabled>Choose...</option>
+		<option selected value="option">Choose a option</option>
+		<option value="Available">Available</option>
+		<option value="Unavailable">Unavailable</option>
+	</select>
+	<br> <br> <br>
 
+	<label for="transit">Public Tranportation: </label>
+	<select id="transit" name="transit" class="form-control" required>
+		<option disabled>Choose...</option>
+		<option selected value="option">Choose a option</option>
+		<option value="Available">Available</option>
+		<option value="Unavailable">Unavailable</option>
+	</select>
+	<br> <br> <br>
+
+	<script>
+
+		fetch("./user_file.json")
+			.then(function (resp) {
+				return resp.json();
+			})
+			.then(function (data) {
+				console.log(data);
+
+			});
+
+	</script>
 
 </body>
-<script>
 
-
-	fetch("./user_file.json")
-	.then(function (resp) {
-		return resp.json();
-	})
-	.then(function (data) {
-		console.log(data);
-
-	});
-</script>
 </html>
