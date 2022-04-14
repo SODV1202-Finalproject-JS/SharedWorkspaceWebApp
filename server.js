@@ -38,7 +38,8 @@ app.get('/users', function (req, res) {
 });
 
 app.get('/showAllUsers', function (req, res) {
-    res.send(mydata);
+    const allUsers = fs.readFileSync('user_file.json', 'utf8');
+    res.send(allUsers);
 });
 
 
