@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
     res.send("Welcom to register!   Please use http://localhost:3005/signup  to open a registration form");
 });
 app.get('/signup', function (req, res) {
-    res.sendFile(__dirname + "/" + "question2.html");
+    res.sendFile(__dirname + "/pages/" + "signup.html");
 });
 
 app.get('/users', function (req, res) {
@@ -37,11 +37,11 @@ app.post('/user', urlencodedParser, Newuser);
 
 function Newuser(req, res) {
     response = {
-        fn: req.body.name,
-        ln: req.body.phone,
-        fn: req.body.email,
-        ln: req.body.registrationType,
-        ln: req.body.password
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        role: req.body.role,
+        password: req.body.password
     }
     if (!response.fn || !response.ln) {
         reply = {
@@ -55,8 +55,9 @@ function Newuser(req, res) {
             name: req.body.name,
             phone: req.body.phone,
             email: req.body.email,
-            registrationType: req.body.registrationType,
-            password: req.body.password
+            role: req.body.role,
+            password: req.body.password,
+            logged: false
         });
 
         let data = JSON.stringify(obj, null, 2);
@@ -68,8 +69,9 @@ function Newuser(req, res) {
                 name: req.body.name,
                 phone: req.body.phone,
                 address: req.body.address,
-                registrationType: req.body.registrationType,
+                role: req.body.role,
                 password: req.body.password,
+                logged: false,
                 status: "success",
                 msg: "thank you"
             }

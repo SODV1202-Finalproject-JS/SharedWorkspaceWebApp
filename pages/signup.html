@@ -13,17 +13,17 @@
       <h2>User Registration Form</h2>
 
       <form action="http://localhost:3005/user" method="POST">
-         <label for="">Name: </label> <input type="text" name="name"> <br> <br> <br>
-         <label for="">Phone: </label> <input type="text" name="phone"> <br> <br> <br>
-         <label for="">Email: </label><input type="text" name="email"><br> <br> <br>
-         <label for="registrationType">Registration Type: </label>
-         <select id="registrationType" required name="registrationType" class="form-control">
+         <label for="name">Name: </label> <input type="text" name="name"> <br> <br> <br>
+         <label for="phone">Phone: </label> <input type="text" name="phone"> <br> <br> <br>
+         <label for="email">Email: </label><input type="text" name="email"><br> <br> <br>
+         <label for="role">Registration Type: </label>
+         <select id="role" name="role" class="form-control" required>
             <option disabled>Choose...</option>
             <option selected value="option">Choose a option</option>
             <option value="owner">Owner</option>
             <option value="coworker">Coworker</option>
          </select><br> <br> <br>
-         <label for="">Passwword: </label> <input type="password" name="password">
+         <label for="password">Passwword: </label> <input type="password" name="password">
          <br><br><br><input type="submit" value="Submit">
    </div>
    <script src="">
