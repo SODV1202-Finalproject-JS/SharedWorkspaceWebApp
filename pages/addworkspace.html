@@ -6,50 +6,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Workspace</title>
+    <link rel="stylesheet" href="signup.css">
 </head>
 
 <body>
-    <div id="divBack">
-        <h2>Add Property/Workspace</h2>
+    <div id="divBack" class="signupForm">
+        <form action="http://localhost:3005/worksent" method="POST" class="form">
+            <h2>Add Property/Workspace</h2>
 
-        <form action="http://localhost:3005/worksent" method="POST">
-            <label for="name">Name: </label> <input type="text" name="name">
-            <br> <br> <br>
+            <div class="inputContainer">
+                <input type="text" name="name" class="input" placeholder="Name: ">
+                <label for="name" class="label"></label>
+            </div>
 
-            <label for="building_id">Building ID: </label> <input type="text" name="building_id">
-            <br> <br> <br>
+            <div class="inputContainer">
+                <input type="text" name="building_id" class="input" placeholder="Building ID: ">
+                <label for="building_id" class="label"></label>
+            </div>
 
-            <label for="workspace_id">Workspace ID: </label> <input type="text" name="workspace_id">
-            <br> <br> <br>
+            <div class="inputContainer">
+                <input type="text" name="workspace_id" class="input" placeholder="Workspace ID: ">
+                <label for="workspace_id" class="label"></label>
+            </div>
 
-            <label for="address">Address: </label><input type="text" name="address">
-            <br> <br> <br>
+            <div class="inputContainer">
+                <input type="text" name="address" class="input" placeholder="Address: ">
+                <label for="address" class="label"></label>
+            </div>
+            <div class="inputContainer">
 
-            <label for="neighborhood">Neighborhood: </label><input type="text" name="neighborhood"><br> <br> <br>
+                <input type="text" name="neighborhood" class="input" placeholder="Neighborhood: ">
+                <label for="neighborhood" class="label"></label>
+            </div>
 
-            <label for="size">Size (square feet): </label><input type="text" name="size"><br> <br> <br>
+            <div class="inputContainer">
+                <input type="text" name="size" class="input" placeholder="Size (square feet): ">
+                <label for="size" class="label"></label>
+            </div>
 
-            <label for="garage">Parking garage: </label>
-            <select id="garage" name="garage" class="form-control" required>
-                <option disabled>Choose...</option>
-                <option selected value="option">Choose a option</option>
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-            </select><br> <br> <br>
+            <div class="inputContainerOptions">
+                <select id="garage" name="garage" class="inputOptions" placeholder="Parking garage: " required>
+                    <option disabled value="" selected>Parking Garage:</option>
+                    <option disabled>Choose:</option>
+                    <option value="Available">Available</option>
+                    <option value="Unavailable">Unavailable</option>
+                </select>
+                <label for="garage" class="label"></label>
+            </div>
 
-            <label for="Transit">Public Tranportation: </label>
-            <select id="Transit" name="Transit" class="form-control" required>
-                <option disabled>Choose...</option>
-                <option selected value="option">Choose a option</option>
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-            </select><br> <br> <br>
+            <div class="inputContainerOptions">
+                <select id="Transit" name="Transit" class="inputOptions" placeholder=" Public Transportation: " required>
+                    <option disabled value="" selected>Public Transportation:</option>
+                    <option disabled>Choose:</option>
+                    <option value="Available">Available</option>
+                    <option value="Unavailable">Unavailable</option>
+                </select>
+                <label for="Transit" class="label"></label>
+            </div>
 
-            <input type="submit" value="Submit">
+            <div>
+                <div class="BtnsLeft">
+                    <input type="submit" value="Submit" class="submit">
+                    <input type="submit" value="Search Property" class="submit">
+                </div>
+                <div class="BtnsRight">
+                    <input type="submit" value="Delete" class="submit">
+                    <input type="submit" value="List Property" class="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="">
 
-            <script src="">
-
-            </script>
+    </script>
 </body>
 
 </html>
