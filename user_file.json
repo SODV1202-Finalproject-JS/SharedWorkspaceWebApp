@@ -15,6 +15,14 @@
       "role": "owner",
       "password": "jkl;",
       "logged": false
+    },
+    {
+      "name": "test",
+      "phone": "123213",
+      "email": "213123213",
+      "role": "owner",
+      "password": "2131232132",
+      "logged": false
     }
   ]
 }
