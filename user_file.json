@@ -1,0 +1,20 @@
+{
+  "user": [
+    {
+      "name": "Gabriel De Oliveira",
+      "phone": "5879663658",
+      "email": "gabriel.d.oliveira1@hotmail.com",
+      "role": "owner",
+      "password": "qwer",
+      "logged": false
+    },
+    {
+      "name": "Isac Smith",
+      "phone": "1231231234",
+      "email": "isac@hotmail.com",
+      "role": "owner",
+      "password": "jkl;",
+      "logged": false
+    }
+  ]
+}

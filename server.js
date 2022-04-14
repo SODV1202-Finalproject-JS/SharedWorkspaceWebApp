@@ -6,6 +6,7 @@ var fs = require('fs');
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
 })
+
 var exists = fs.existsSync('user_file.json');
 if (exists) {
     console.log('loading user file');
@@ -14,7 +15,6 @@ if (exists) {
     obj = JSON.parse(mydata);
 } else {
 
-
     console.log('Created new object')
     var obj = {
         user: []
@@ -22,18 +22,27 @@ if (exists) {
 }
 
 app.get('/', function (req, res) {
-    res.send("Welcom to register!   Please use http://localhost:3005/signup  to open a registration form");
+    res.send("Welcome to register! Please use http://localhost:3005/signup to open a registration form");
 });
+
 app.get('/signup', function (req, res) {
     res.sendFile(__dirname + "/pages/" + "signup.html");
+});
+
+app.get('/addworkspace', function (req, res) {
+    res.sendFile(__dirname + "/pages/" + "addworkspace.html");
 });
 
 app.get('/users', function (req, res) {
     res.sendFile(__dirname + "/" + "question3.html");
 });
 
-app.post('/user', urlencodedParser, Newuser);
+app.get('/showAllUsers', function (req, res) {
+    res.send(mydata);
+});
 
+
+app.post('/user', urlencodedParser, Newuser);
 
 function Newuser(req, res) {
     response = {
@@ -43,7 +52,7 @@ function Newuser(req, res) {
         role: req.body.role,
         password: req.body.password
     }
-    if (!response.fn || !response.ln) {
+    if (!response.name || !response.phone || !response.email || !response.role || !response.password) {
         reply = {
             msg: "Please complete the form before you submit it"
         }
@@ -68,7 +77,6 @@ function Newuser(req, res) {
             reply = {
                 name: req.body.name,
                 phone: req.body.phone,
-                address: req.body.address,
                 role: req.body.role,
                 password: req.body.password,
                 logged: false,
@@ -80,6 +88,53 @@ function Newuser(req, res) {
         }
     }
 }
+
+
+/***** Add Workspace ******/
+
+app.post('/worksent', urlencodedParser, Newwork);
+
+function Newwork(req, res) {
+    response = {
+        name: req.body.name,
+        building_id: req.body.building_id,
+        workspace_id: req.body.workspace_id
+    }
+    if (!response.name || !response.building_id || !response.workspace_id) {
+        reply = {
+            msg: "Please complete the form before you submit it"
+        }
+        res.send(reply);
+        console.log(reply)
+    } else {
+
+        obj.user[0].push({
+            name: req.body.name,
+            building_id: req.body.building_id,
+            workspace_id: req.body.workspace_id,
+            logged: false
+        });
+
+        let data = JSON.stringify(obj, null, 2);
+        fs.writeFile('user_file.json', data, finished);
+        console.log('user_file.JSON is updated')
+
+        function finished(err) {
+            reply = {
+                name: req.body.name,
+                building_id: req.body.building_id,
+                workspace_id: req.body.workspace_id,
+                logged: false,
+                status: "success",
+                msg: "thank you"
+            }
+            res.send(reply);
+            console.log(reply);
+        }
+    }
+}
+
+
 
 var server = app.listen(3005, function () {
     var host = server.address().address
