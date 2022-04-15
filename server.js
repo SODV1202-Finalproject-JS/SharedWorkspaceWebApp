@@ -56,12 +56,10 @@ app.post('/auth', urlencodedParser,  (req, res) => {
             loginResponse = false;
         }
         if(!loginResponse){
-            res.send(__dirname + "/pages/loginError.html");
-            res.end();
+            res.sendFile(__dirname + "/pages/loginError.html");
         }
     } else {
-        res.send(__dirname + "/pages/loginError.html");
-        res.end();
+        res.sendFile(__dirname + "/pages/loginError.html");
     }
 })
 
