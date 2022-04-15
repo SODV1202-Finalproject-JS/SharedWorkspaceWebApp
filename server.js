@@ -54,7 +54,8 @@ function Newwork(req, res) {
         neighborhood: req.body.neighborhood,
         size: req.body.size,
         garage: req.body.garage,
-        transit: req.body.transit
+        transit: req.body.transit,
+        date: req.body.date
     }
     if (!response.name || !response.building_id || !response.workspace_id || !response.address || !response.neighborhood || !response.size || !response.garage || !response.transit) {
         reply = {
@@ -73,6 +74,7 @@ function Newwork(req, res) {
             size: req.body.size,
             garage: req.body.garage,
             transit: req.body.transit,
+            date: req.body.date,
             logged: false
         });
 
@@ -90,6 +92,7 @@ function Newwork(req, res) {
                 size: req.body.size,
                 garage: req.body.garage,
                 transit: req.body.transit,
+                date: req.body.date,
                 logged: false,
                 status: "success",
                 msg: "thank you"
