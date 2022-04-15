@@ -29,6 +29,87 @@ app.get('/signup', function (req, res) {
     res.sendFile(__dirname + "/pages/" + "signup.html");
 });
 
+//Login area ----------------
+
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + "/pages/login.html");
+});
+
+app.post('/auth', urlencodedParser,  (req, res) => {
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
+    let email = req.body.email;
+    let password = req.body.password;
+    let loginResponse;
+    if(email && password) {
+        for(let i = 0; i < obj.user.length; i++){
+            if(obj.user[i].email == email && obj.user[i].password == password){
+                obj.user[i].logged = true;
+                let updatedData = JSON.stringify(obj, null, 2);
+                fs.writeFile('user_file.json', updatedData, ()=>{
+                    console.log("Success!")
+                });
+                res.redirect('http://localhost:3005/home');
+                loginResponse = true;
+                break;
+            }
+            loginResponse = false;
+        }
+        if(!loginResponse){
+            res.send(__dirname + "/pages/loginError.html");
+            res.end();
+        }
+    } else {
+        res.send(__dirname + "/pages/loginError.html");
+        res.end();
+    }
+})
+
+//End login area ----------
+
+//Checks if the user is logged in --------
+function isLoggedIn(){
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
+    for(let i = 0; i < obj.user.length; i++){
+        if(obj.user[i].logged == true){
+            loginResponse = true;
+            break;
+        }
+        loginResponse = false;
+    }
+    return loginResponse;
+}
+
+//Home page -----------
+app.get('/home', function (req, res) {
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/home.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+});
+
+
+//End home page -----------
+
+//Logout area ------
+app.post('/logout', (req, res) => {
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
+     for(let i = 0; i < obj.user.length; i++){
+        if(obj.user[i].logged == true){
+            obj.user[i].logged = false;
+            let updatedData = JSON.stringify(obj, null, 2);
+            fs.writeFile('user_file.json', updatedData, ()=>{
+                console.log("Success!")
+            });
+            res.redirect('http://localhost:3005/login');
+            break;
+        }
+    }
+})
+//End logout area -------
 app.get('/addworkspace', function (req, res) {
     res.sendFile(__dirname + "/pages/" + "addworkspace.html");
 });
@@ -54,8 +135,7 @@ function Newwork(req, res) {
         neighborhood: req.body.neighborhood,
         size: req.body.size,
         garage: req.body.garage,
-        transit: req.body.transit,
-        date: req.body.date
+        transit: req.body.transit
     }
     if (!response.name || !response.building_id || !response.workspace_id || !response.address || !response.neighborhood || !response.size || !response.garage || !response.transit) {
         reply = {
@@ -74,7 +154,6 @@ function Newwork(req, res) {
             size: req.body.size,
             garage: req.body.garage,
             transit: req.body.transit,
-            date: req.body.date,
             logged: false
         });
 
@@ -92,7 +171,6 @@ function Newwork(req, res) {
                 size: req.body.size,
                 garage: req.body.garage,
                 transit: req.body.transit,
-                date: req.body.date,
                 logged: false,
                 status: "success",
                 msg: "thank you"

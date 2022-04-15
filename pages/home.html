@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1></h1>
+    <form action="http://localhost:3005/logout" method="POST">
+    <input type="submit" value="Logout">
+    </form>
+</body>
+<script>
+
+
+function isLoggedIn(data){
+    obj = data;
+    for(let i = 0; i < obj.user.length; i++){
+        if(obj.user[i].logged == true){
+            loginResponse = {
+                logged: true,
+                userInfo: obj.user[i]
+            };
+            break;
+        }
+        loginResponse = {
+                logged: false
+            };
+    }
+    return loginResponse;
+}
+
+function displayUser(user){
+    const h1 = document.querySelector('h1');
+    h1.innerHTML = `
+        <h1>Welcome ${user.name}</h1>
+    `;
+}
+
+fetch('http://localhost:3005/showAllUsers')
+.then(response => response.json())
+.then((data) => {
+    const response = isLoggedIn(data);
+    if(response.logged){
+        displayUser(response.userInfo);
+    }
+});
+</script>
+
+</html>

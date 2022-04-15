@@ -10,23 +10,13 @@
 
 <body>
     <h1>Login Page</h1>
-    <label for="">Email: </label><input type="text" name="email"><br><br>
-    <label for="">Password: </label><input type="password" name="passowrd" id="">
-    <br><br><br><input type="submit" value="Submit">
+    <form action="http://localhost:3005/auth" method="POST">
+        <label for="email">Email: </label><input type="text" name="email"><br> <br> 
+         <label for="password">Password: </label> <input type="password" name="password">
+        <br><br><br><input type="submit" value="Submit">
+    </form>
 </body>
 <script>
-
-
-        fetch("./user_file.json")
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            console.log(data);
-
-        });
-
-
 
 </script>
 
