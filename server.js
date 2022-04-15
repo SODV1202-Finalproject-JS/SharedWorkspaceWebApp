@@ -43,17 +43,20 @@ app.get('/showAllUsers', function (req, res) {
 });
 
 
-app.post('/user', urlencodedParser, Newuser);
+app.post('/worksent', urlencodedParser, Newwork);
 
-function Newuser(req, res) {
+function Newwork(req, res) {
     response = {
         name: req.body.name,
-        phone: req.body.phone,
-        email: req.body.email,
-        role: req.body.role,
-        password: req.body.password
+        building_id: req.body.building_id,
+        workspace_id: req.body.workspace_id,
+        address: req.body.address,
+        neighborhood: req.body.neighborhood,
+        size: req.body.size,
+        garage: req.body.garage,
+        transit: req.body.transit
     }
-    if (!response.name || !response.phone || !response.email || !response.role || !response.password) {
+    if (!response.name || !response.building_id || !response.workspace_id || !response.address || !response.neighborhood || !response.size || !response.garage || !response.transit) {
         reply = {
             msg: "Please complete the form before you submit it"
         }
@@ -63,56 +66,13 @@ function Newuser(req, res) {
 
         obj.user.push({
             name: req.body.name,
-            phone: req.body.phone,
-            email: req.body.email,
-            role: req.body.role,
-            password: req.body.password,
-            logged: false
-        });
-
-        let data = JSON.stringify(obj, null, 2);
-        fs.writeFile('user_file.json', data, finished);
-        console.log('user_file.JSON is updated')
-
-        function finished(err) {
-            reply = {
-                name: req.body.name,
-                phone: req.body.phone,
-                role: req.body.role,
-                password: req.body.password,
-                logged: false,
-                status: "success",
-                msg: "thank you"
-            }
-            res.send(reply);
-            console.log(reply);
-        }
-    }
-}
-
-
-/***** Add Workspace ******/
-
-app.post('/worksent', urlencodedParser, Newwork);
-
-function Newwork(req, res) {
-    response = {
-        name: req.body.name,
-        building_id: req.body.building_id,
-        workspace_id: req.body.workspace_id
-    }
-    if (!response.name || !response.building_id || !response.workspace_id) {
-        reply = {
-            msg: "Please complete the form before you submit it"
-        }
-        res.send(reply);
-        console.log(reply)
-    } else {
-
-        obj.user[0].push({
-            name: req.body.name,
             building_id: req.body.building_id,
             workspace_id: req.body.workspace_id,
+            address: req.body.address,
+            neighborhood: req.body.neighborhood,
+            size: req.body.size,
+            garage: req.body.garage,
+            transit: req.body.transit,
             logged: false
         });
 
@@ -125,6 +85,11 @@ function Newwork(req, res) {
                 name: req.body.name,
                 building_id: req.body.building_id,
                 workspace_id: req.body.workspace_id,
+                address: req.body.address,
+                neighborhood: req.body.neighborhood,
+                size: req.body.size,
+                garage: req.body.garage,
+                transit: req.body.transit,
                 logged: false,
                 status: "success",
                 msg: "thank you"
@@ -134,6 +99,7 @@ function Newwork(req, res) {
         }
     }
 }
+
 
 
 
