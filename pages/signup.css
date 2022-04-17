@@ -87,6 +87,7 @@ body {
     transition: 0.2s;
     width: 46.9%;
     justify-content: center;
+    display: inline;
   }
   
 .submit:hover {
@@ -99,6 +100,10 @@ body {
     z-index: 2;
   }
 
-  h3{
-    color: red;
-  }
+h3{
+   color: red;
+}
+
+a {
+    text-decoration: none;
+}
