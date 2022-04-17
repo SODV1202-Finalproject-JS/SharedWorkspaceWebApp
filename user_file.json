@@ -23,6 +23,14 @@
       "role": "owner",
       "password": "2131232132",
       "logged": false
+    },
+    {
+      "name": "tesst5",
+      "phone": "3424234234",
+      "email": "234234234324",
+      "role": "coworker",
+      "password": "234234234234234234",
+      "logged": false
     }
   ]
 }

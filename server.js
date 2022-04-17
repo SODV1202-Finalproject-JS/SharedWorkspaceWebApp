@@ -108,19 +108,66 @@ app.post('/logout', (req, res) => {
     }
 })
 //End logout area -------
-app.get('/addworkspace', function (req, res) {
-    res.sendFile(__dirname + "/pages/" + "addworkspace.html");
-});
 
-app.get('/users', function (req, res) {
-    res.sendFile(__dirname + "/" + "question3.html");
-});
+//Signup area -------
+
+app.post('/user', urlencodedParser, Newuser);
+
+function Newuser(req, res) {
+    response = {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        role: req.body.role,
+        password: req.body.password
+    }
+    if (!response.name || !response.phone || !response.email || !response.role || !response.password) {
+        reply = {
+            msg: "Please complete the form before you submit it"
+        }
+        res.send(reply);
+        console.log(reply)
+    } else {
+
+        obj.user.push({
+            name: req.body.name,
+            phone: req.body.phone,
+            email: req.body.email,
+            role: req.body.role,
+            password: req.body.password,
+            logged: false
+        });
+
+        let data = JSON.stringify(obj, null, 2);
+        fs.writeFile('user_file.json', data, finished);
+        console.log('user_file.JSON is updated')
+
+        function finished(err) {
+            reply = {
+                name: req.body.name,
+                phone: req.body.phone,
+                role: req.body.role,
+                password: req.body.password,
+                logged: false,
+                status: "success",
+                msg: "thank you"
+            }
+            res.send(reply);
+            console.log(reply);
+        }
+    }
+}
+
+//End signup area --------
 
 app.get('/showAllUsers', function (req, res) {
     const allUsers = fs.readFileSync('user_file.json', 'utf8');
     res.send(allUsers);
 });
 
+app.get('/addworkspace', function (req, res) {
+    res.sendFile(__dirname + "/pages/" + "addworkspace.html");
+});
 
 app.post('/worksent', urlencodedParser, Newwork);
 
