@@ -21,6 +21,8 @@ if (exists) {
     };
 }
 
+app.use(express.static('pages'))
+
 app.get('/', function (req, res) {
     res.send("Welcome to register! Please use http://localhost:3005/signup to open a registration form");
 });
