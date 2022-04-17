@@ -5,50 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signup.css">
     <title>Document</title>
 </head>
 
 <body>
-    <h1></h1>
-    <form action="http://localhost:3005/logout" method="POST">
-    <input type="submit" value="Logout">
-    </form>
+    <div class="signupForm">
+        <form action="http://localhost:3005/logout" method="POST" class="form">
+            <h2></h2>
+            <br><br>    
+            <input type="submit" value="Logout" class="submit">
+            <a href="http://localhost:3005/addworkspace" class="submit">Add Workspaces</a> 
+        </form>
+    </div>
 </body>
 <script>
-
-
-function isLoggedIn(data){
-    obj = data;
-    for(let i = 0; i < obj.user.length; i++){
-        if(obj.user[i].logged == true){
+    function isLoggedIn(data) {
+        obj = data;
+        for (let i = 0; i < obj.user.length; i++) {
+            if (obj.user[i].logged == true) {
+                loginResponse = {
+                    logged: true,
+                    userInfo: obj.user[i]
+                };
+                break;
+            }
             loginResponse = {
-                logged: true,
-                userInfo: obj.user[i]
-            };
-            break;
-        }
-        loginResponse = {
                 logged: false
             };
+        }
+        return loginResponse;
     }
-    return loginResponse;
-}
 
-function displayUser(user){
-    const h1 = document.querySelector('h1');
-    h1.innerHTML = `
-        <h1>Welcome ${user.name}</h1>
+    function displayUser(user) {
+        const h1 = document.querySelector('h2');
+        h1.innerHTML = `
+        <h2>Welcome <h1>${user.name}<h1/></h2>
     `;
-}
-
-fetch('http://localhost:3005/showAllUsers')
-.then(response => response.json())
-.then((data) => {
-    const response = isLoggedIn(data);
-    if(response.logged){
-        displayUser(response.userInfo);
     }
-});
+
+    fetch('http://localhost:3005/showAllUsers')
+        .then(response => response.json())
+        .then((data) => {
+            const response = isLoggedIn(data);
+            if (response.logged) {
+                displayUser(response.userInfo);
+            }
+        });
 </script>
 
 </html>
