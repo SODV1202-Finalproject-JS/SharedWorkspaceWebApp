@@ -28,7 +28,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/signup', function (req, res) {
-    res.sendFile(__dirname + "/pages/" + "signup.html");
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/home.html");
+    } else {
+        res.sendFile(__dirname + "/pages/" + "signup.html");
+    }
 });
 
 //Login area ----------------
@@ -69,6 +73,7 @@ app.post('/auth', urlencodedParser,  (req, res) => {
 
 //Checks if the user is logged in --------
 function isLoggedIn(){
+    let loginResponse = false;
     const mydata = fs.readFileSync('user_file.json', 'utf8');
     obj = JSON.parse(mydata);
     for(let i = 0; i < obj.user.length; i++){
@@ -76,7 +81,6 @@ function isLoggedIn(){
             loginResponse = true;
             break;
         }
-        loginResponse = false;
     }
     return loginResponse;
 }
@@ -130,15 +134,27 @@ function Newuser(req, res) {
         res.send(reply);
         console.log(reply)
     } else {
-
-        obj.user.push({
-            name: req.body.name,
-            phone: req.body.phone,
-            email: req.body.email,
-            role: req.body.role,
-            password: req.body.password,
-            logged: false
-        });
+        if(response.role == "owner"){
+            obj.user.push({
+                name: req.body.name,
+                phone: req.body.phone,
+                email: req.body.email,
+                role: req.body.role,
+                workspaces: [],
+                password: req.body.password,
+                logged: false
+            });
+        } else {
+            obj.user.push({
+                name: req.body.name,
+                phone: req.body.phone,
+                email: req.body.email,
+                role: req.body.role,
+                contracts: [],
+                password: req.body.password,
+                logged: false
+            });
+        }
 
         let data = JSON.stringify(obj, null, 2);
         fs.writeFile('user_file.json', data, finished);
@@ -154,10 +170,10 @@ function Newuser(req, res) {
                 status: "success",
                 msg: "thank you"
             }
-            res.send(reply);
             console.log(reply);
         }
     }
+    res.redirect("http://localhost:3005/home");
 }
 
 //End signup area --------
@@ -168,12 +184,18 @@ app.get('/showAllUsers', function (req, res) {
 });
 
 app.get('/addworkspace', function (req, res) {
-    res.sendFile(__dirname + "/pages/" + "addworkspace.html");
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/" + "addworkspace.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
 });
 
 app.post('/worksent', urlencodedParser, Newwork);
 
 function Newwork(req, res) {
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
     response = {
         name: req.body.name,
         building_id: req.body.building_id,
@@ -191,8 +213,14 @@ function Newwork(req, res) {
         res.send(reply);
         console.log(reply)
     } else {
-
-        obj.user.push({
+        let userID;
+        for(let i = 0; i < obj.user.length; i++){
+            if(obj.user[i].logged == true){
+                userID = i;
+                break;
+            }
+        };
+        obj.user[userID].workspaces.push({
             name: req.body.name,
             building_id: req.body.building_id,
             workspace_id: req.body.workspace_id,
@@ -200,8 +228,7 @@ function Newwork(req, res) {
             neighborhood: req.body.neighborhood,
             size: req.body.size,
             garage: req.body.garage,
-            transit: req.body.transit,
-            logged: false
+            transit: req.body.transit
         });
 
         let data = JSON.stringify(obj, null, 2);
@@ -218,14 +245,13 @@ function Newwork(req, res) {
                 size: req.body.size,
                 garage: req.body.garage,
                 transit: req.body.transit,
-                logged: false,
                 status: "success",
                 msg: "thank you"
             }
-            res.send(reply);
             console.log(reply);
         }
     }
+    res.redirect("http://localhost:3005/addworkspace");
 }
 
 
