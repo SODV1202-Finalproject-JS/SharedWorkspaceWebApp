@@ -1,6 +1,6 @@
 ## SODV1201 INTRODUCTION TO WEB PROGRAMMING
 
-###Course Project: Shared Workspace Web App
+### Course Project: Shared Workspace Web App
 
 Coworking is a work style where different individuals or teams share a working
 environment. If you are a self-employed or a working-from-home professional,
