@@ -21,11 +21,14 @@ if (exists) {
     };
 }
 
-app.use(express.static('pages'))
+app.use(express.static('pages'));
+app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
     res.send("Welcome to register! Please use http://localhost:3005/signup to open a registration form");
 });
+
+//Signup area -------
 
 app.get('/signup', function (req, res) {
     if(isLoggedIn()){
@@ -34,88 +37,6 @@ app.get('/signup', function (req, res) {
         res.sendFile(__dirname + "/pages/" + "signup.html");
     }
 });
-
-//Login area ----------------
-
-app.get('/login', function (req, res) {
-    res.sendFile(__dirname + "/pages/login.html");
-});
-
-app.post('/auth', urlencodedParser,  (req, res) => {
-    const mydata = fs.readFileSync('user_file.json', 'utf8');
-    obj = JSON.parse(mydata);
-    let email = req.body.email;
-    let password = req.body.password;
-    let loginResponse;
-    if(email && password) {
-        for(let i = 0; i < obj.user.length; i++){
-            if(obj.user[i].email == email && obj.user[i].password == password){
-                obj.user[i].logged = true;
-                let updatedData = JSON.stringify(obj, null, 2);
-                fs.writeFile('user_file.json', updatedData, ()=>{
-                    console.log("Success!")
-                });
-                res.redirect('http://localhost:3005/home');
-                loginResponse = true;
-                break;
-            }
-            loginResponse = false;
-        }
-        if(!loginResponse){
-            res.sendFile(__dirname + "/pages/loginError.html");
-        }
-    } else {
-        res.sendFile(__dirname + "/pages/loginError.html");
-    }
-})
-
-//End login area ----------
-
-//Checks if the user is logged in --------
-function isLoggedIn(){
-    let loginResponse = false;
-    const mydata = fs.readFileSync('user_file.json', 'utf8');
-    obj = JSON.parse(mydata);
-    for(let i = 0; i < obj.user.length; i++){
-        if(obj.user[i].logged == true){
-            loginResponse = true;
-            break;
-        }
-    }
-    return loginResponse;
-}
-
-//Home page -----------
-app.get('/home', function (req, res) {
-    if(isLoggedIn()){
-        res.sendFile(__dirname + "/pages/home.html");
-    } else {
-        res.redirect("http://localhost:3005/login");
-    }
-});
-
-
-//End home page -----------
-
-//Logout area ------
-app.post('/logout', (req, res) => {
-    const mydata = fs.readFileSync('user_file.json', 'utf8');
-    obj = JSON.parse(mydata);
-     for(let i = 0; i < obj.user.length; i++){
-        if(obj.user[i].logged == true){
-            obj.user[i].logged = false;
-            let updatedData = JSON.stringify(obj, null, 2);
-            fs.writeFile('user_file.json', updatedData, ()=>{
-                console.log("Success!")
-            });
-            res.redirect('http://localhost:3005/login');
-            break;
-        }
-    }
-})
-//End logout area -------
-
-//Signup area -------
 
 app.post('/user', urlencodedParser, Newuser);
 
@@ -141,8 +62,7 @@ function Newuser(req, res) {
                 email: req.body.email,
                 role: req.body.role,
                 workspaces: [],
-                password: req.body.password,
-                logged: false
+                password: req.body.password
             });
         } else {
             obj.user.push({
@@ -151,8 +71,7 @@ function Newuser(req, res) {
                 email: req.body.email,
                 role: req.body.role,
                 contracts: [],
-                password: req.body.password,
-                logged: false
+                password: req.body.password
             });
         }
 
@@ -166,7 +85,6 @@ function Newuser(req, res) {
                 phone: req.body.phone,
                 role: req.body.role,
                 password: req.body.password,
-                logged: false,
                 status: "success",
                 msg: "thank you"
             }
@@ -178,11 +96,98 @@ function Newuser(req, res) {
 
 //End signup area --------
 
-app.get('/showAllUsers', function (req, res) {
-    const allUsers = fs.readFileSync('user_file.json', 'utf8');
-    res.send(allUsers);
+//Login area ----------------
+const userAuth = {
+    userLogged: false,
+    username: "",
+    useremail: ""
+};
+
+//Checks if the user is logged in
+function isLoggedIn(){
+    return userAuth.userLogged;
+}
+
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + "/pages/login.html");
 });
 
+app.post('/login',  (req, res) => {
+    let ipnutEmail = req.body.email;
+    let inputPassword = req.body.password;
+
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
+    
+    const loginResponse = {
+        success: false,
+        message: ''
+    };
+    if(ipnutEmail && inputPassword) {
+        for(let i = 0; i < obj.user.length; i++){
+            if(obj.user[i].email == ipnutEmail && obj.user[i].password == inputPassword){
+                
+                //Auth
+                userAuth.userLogged = true;
+                userAuth.username = obj.user[i].name;
+                userAuth.useremail = obj.user[i].email;
+                
+                loginResponse.success = true;
+                loginResponse.message = 'Login success';
+
+                res.status(200).json(loginResponse);
+                break;
+            }
+        }
+        if(!loginResponse.success){
+
+            loginResponse.message = 'User not found';
+
+            res.status(404).json(loginResponse);
+        }
+    } else {
+        loginResponse.message = 'Empty input area';
+
+        res.status(404).json(loginResponse);
+    }
+})
+
+//End login area ----------
+
+//Auth area -----------
+app.get('/auth', function(req, res) {
+    res.send(userAuth);
+})
+//End Auth area --------
+
+//Home page -----------
+app.get('/home', function (req, res) {
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/home.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+});
+
+
+//End home page -----------
+
+//Logout area ------
+app.post('/logout', (req, res) => {
+    if(isLoggedIn()){
+        //Logout
+        userAuth.userLogged = false;
+        userAuth.username = "";
+        userAuth.useremail = "";
+        
+        res.redirect("http://localhost:3005/login");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+})
+//End logout area -------
+
+//Add workspace area ---------
 app.get('/addworkspace', function (req, res) {
     if(isLoggedIn()){
         res.sendFile(__dirname + "/pages/" + "addworkspace.html");
@@ -253,7 +258,7 @@ function Newwork(req, res) {
     }
     res.redirect("http://localhost:3005/addworkspace");
 }
-
+//End add workspace area ---------
 
 
 

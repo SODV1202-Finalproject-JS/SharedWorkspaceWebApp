@@ -20,38 +20,23 @@
     </div>
 </body>
 <script>
-    function isLoggedIn(data) {
-        obj = data;
-        for (let i = 0; i < obj.user.length; i++) {
-            if (obj.user[i].logged == true) {
-                loginResponse = {
-                    logged: true,
-                    userInfo: obj.user[i]
-                };
-                break;
+    const fetchResponse = {
+        handleResponse(response){
+            if(response.userLogged == true){
+               const h2 = document.querySelector('h2');
+               h2.innerText = `Welcome ${response.username}`; 
             }
-            loginResponse = {
-                logged: false
-            };
         }
-        return loginResponse;
     }
 
-    function displayUser(user) {
-        const h1 = document.querySelector('h2');
-        h1.innerHTML = `
-        <h2>Welcome <h1>${user.name}<h1/></h2>
-    `;
-    }
-
-    fetch('http://localhost:3005/showAllUsers')
-        .then(response => response.json())
-        .then((data) => {
-            const response = isLoggedIn(data);
-            if (response.logged) {
-                displayUser(response.userInfo);
-            }
-        });
+    fetch("http://localhost:3005/auth")
+    .then(response => response.json())
+        .then(data => {
+            fetchResponse.handleResponse(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 </script>
 
 </html>

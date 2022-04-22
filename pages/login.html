@@ -11,24 +11,58 @@
 
 <body>
     <div class="signupForm">
-        <form action="http://localhost:3005/auth" method="POST" class="form">
+        <form class="form">
             <h2>Login Page</h1>
-                
-                <div class="inputContainer">
-                    <input type="text" name="email" class="input" placeholder="Email: ">
-                    <label for="email" class="label"></label>
-                </div>
-                
-                <div class="inputContainer">
-                    <input type="password" name="password" class="input" placeholder="Password: ">
-                    <label for="password" class="label"></label>
-                </div>
+            <span style="color: red;"></span>   
+            <div class="inputContainer">
+                <input type="text" name="email" class="input" placeholder="Email: " required>
+                <label for="email" class="label"></label>
+            </div>
+            
+            <div class="inputContainer">
+                <input type="password" name="password" class="input" placeholder="Password: " required>
+                <label for="password" class="label"></label>
+            </div>
 
-                <input type="submit" value="Submit" class="submit">
+            <input type="submit" value="Login" class="submit">
         </form>
     </div>
 </body>
 <script>
+    const form = document.querySelector('form');
+    const httpResponse = {
+        handleResponse(response){
+            if(response.success == false){
+                const errorSpan = document.querySelector('span');
+                errorSpan.innerText = "Incorrect Email and/or Password!";
+            }
+            else if(response.success == true){
+                window.location.replace("http://localhost:3005/home");
+            }
+        }
+    }
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const url = "http://localhost:3005/login";
+        const userData = {
+            email: form.email.value,
+            password: form.password.value
+        }
+        fetch("http://localhost:3005/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        }).then(response => response.json())
+        .then(data => {
+            httpResponse.handleResponse(data);
+        })
+        .catch((error) => {
+            httpResponse.handleResponse(error);
+        })        
+    });
 
 </script>
 

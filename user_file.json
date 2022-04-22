@@ -6,8 +6,7 @@
       "email": "ipsum.porta@aol.org",
       "role": "owner",
       "workspaces": [],
-      "password": "460992",
-      "logged": false
+      "password": "460992"
     },
     {
       "name": "John Winters",
@@ -15,8 +14,7 @@
       "email": "phasellus.libero@icloud.edu",
       "role": "coworker",
       "contracts": [],
-      "password": "622570",
-      "logged": false
+      "password": "622570"
     },
     {
       "name": "Mara Whitley",
@@ -35,8 +33,7 @@
           "transit": "Unavailable"
         }
       ],
-      "password": "609510",
-      "logged": true
+      "password": "609510"
     }
   ]
 }
