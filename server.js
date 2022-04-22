@@ -99,6 +99,7 @@ function Newuser(req, res) {
 //Login area ----------------
 const userAuth = {
     userLogged: false,
+    userID: "",
     username: "",
     useremail: ""
 };
@@ -129,6 +130,7 @@ app.post('/login',  (req, res) => {
                 
                 //Auth
                 userAuth.userLogged = true;
+                userAuth.userID = i;
                 userAuth.username = obj.user[i].name;
                 userAuth.useremail = obj.user[i].email;
                 
@@ -218,14 +220,7 @@ function Newwork(req, res) {
         res.send(reply);
         console.log(reply)
     } else {
-        let userID;
-        for(let i = 0; i < obj.user.length; i++){
-            if(obj.user[i].logged == true){
-                userID = i;
-                break;
-            }
-        };
-        obj.user[userID].workspaces.push({
+        obj.user[userAuth.userID].workspaces.push({
             name: req.body.name,
             building_id: req.body.building_id,
             workspace_id: req.body.workspace_id,

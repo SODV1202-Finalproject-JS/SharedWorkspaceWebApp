@@ -5,7 +5,18 @@
       "phone": "1-974-511-6147",
       "email": "ipsum.porta@aol.org",
       "role": "owner",
-      "workspaces": [],
+      "workspaces": [
+        {
+          "name": "Per Conubia Corporation",
+          "building_id": "1",
+          "workspace_id": "1",
+          "address": "Ap #449-6885 At Rd.",
+          "neighborhood": "East Java",
+          "size": "526",
+          "garage": "Available",
+          "transit": "Available"
+        }
+      ],
       "password": "460992"
     },
     {
