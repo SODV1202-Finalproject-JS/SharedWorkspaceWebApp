@@ -13,30 +13,31 @@
     <div class="signupForm">
         <form class="form">
             <h2>Login Page</h1>
-            <span style="color: red;"></span>   
-            <div class="inputContainer">
-                <input type="text" name="email" class="input" placeholder="Email: " required>
-                <label for="email" class="label"></label>
-            </div>
-            
-            <div class="inputContainer">
-                <input type="password" name="password" class="input" placeholder="Password: " required>
-                <label for="password" class="label"></label>
-            </div>
+                <span style="color: red;"></span>
+                <div class="inputContainer">
+                    <input type="text" name="email" class="input" placeholder="Email: " required>
+                    <label for="email" class="label"></label>
+                </div>
 
-            <input type="submit" value="Login" class="submit">
+                <div class="inputContainer">
+                    <input type="password" name="password" class="input" placeholder="Password: " required>
+                    <label for="password" class="label"></label>
+                </div>
+
+                <input type="submit" value="Login" class="submit">
+                <a href="http://localhost:3005/signup" class="submit">Sign Up</a>
         </form>
     </div>
 </body>
 <script>
     const form = document.querySelector('form');
     const httpResponse = {
-        handleResponse(response){
-            if(response.success == false){
+        handleResponse(response) {
+            if (response.success == false) {
                 const errorSpan = document.querySelector('span');
                 errorSpan.innerText = "Incorrect Email and/or Password!";
             }
-            else if(response.success == true){
+            else if (response.success == true) {
                 window.location.replace("http://localhost:3005/home");
             }
         }
@@ -56,12 +57,12 @@
             },
             body: JSON.stringify(userData),
         }).then(response => response.json())
-        .then(data => {
-            httpResponse.handleResponse(data);
-        })
-        .catch((error) => {
-            httpResponse.handleResponse(error);
-        })        
+            .then(data => {
+                httpResponse.handleResponse(data);
+            })
+            .catch((error) => {
+                httpResponse.handleResponse(error);
+            })
     });
 
 </script>
