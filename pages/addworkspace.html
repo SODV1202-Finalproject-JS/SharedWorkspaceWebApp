@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <div id="divBack" class="signupForm">
+    <div id="divBack" class="signupForm2">
         <form action="http://localhost:3005/worksent" method="POST" class="form">
             <h2>Add Property/Workspace</h2>
-
+            <h4 id="done"></h4>
             <div class="inputContainer">
                 <input type="text" name="name" class="input" placeholder="Name: ">
                 <label for="name" class="label"></label>
@@ -44,6 +44,21 @@
                 <label for="size" class="label"></label>
             </div>
 
+            <div class="inputContainer">
+                <input type="text" name="seats" class="input" placeholder="Number of Seats Available: ">
+                <label for="size" class="label"  max="5" id="seats" placeholder="number of seats" class="input"></label>
+            </div>
+
+            <div class="inputContainerOptions">
+                <select id="smoke" name="smoke" class="inputOptions" placeholder="Smoker: " required>
+                    <option disabled value="" selected>Smoker: </option>
+                    <option disabled>Choose...</option>
+                    <option value="Available">Available</option>
+                    <option value="Unavailable">Smoke Free</option>
+                </select>
+                <label for="smoke" class="label"></label>
+            </div>
+
             <div class="inputContainerOptions">
                 <select id="garage" name="garage" class="inputOptions" placeholder="Parking garage: " required>
                     <option disabled value="" selected>Parking Garage:</option>
@@ -65,6 +80,28 @@
                 <label for="transit" class="label"></label>
             </div>
 
+            <div class="inputContainerOptions">
+                <select id="price" name="price" class="inputOptions" placeholder="Prices: "
+                    required>
+                    <option disabled value="" selected>Prices Available:</option>
+                    <option disabled>Choose options...</option>
+                    <option value="Individual">Individual - $ 25.00</option>
+                    <option value="Double">Double - $ 45.00</option>
+                    <option value="Group">Group seats 3 to 5 - $ 99.00</option>
+                </select>
+                <label for="transit" class="label"></label>
+            </div>
+            
+
+            <div class="inputContainer">
+                <label for="lease" class="label">Lease period: </label>
+                <input type="date" name="date" max="" id="fromDate" placeholder="Lease Term From:" class="input">
+
+                <input type="date" name="date" min="" id="toDate" placeholder="To Date:" class="input">
+                <label class="label"></label>
+            </div>
+            <br><br><br><br>
+           
             <div class="inputContainer">
 
                 <label for="availability" class="label">Availability period: </label>
@@ -76,15 +113,21 @@
             <br><br><br>
             <div>
                 <div class="BtnsLeft">
-                    <input type="submit" value="Submit" class="submit">
+                    <input type="submit" value="Submit" class="submit" id="function" onclick="done()">
                     <input type="submit" value="Search Property" class="submit">
                 </div>
                 <div class="BtnsRight">
                     <input type="submit" value="Delete" class="submit">
+                    <a href="http://localhost:3005/home" class="submit">Home</a>
                 </div>
             </div>
         </form>
     </div>
 </body>
-
+<script>
+    function done()
+    {
+        alert("Done!");
+    }
+</script>
 </html>

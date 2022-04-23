@@ -23,6 +23,13 @@ body {
     height: 100vh;
   }
 
+  .signupForm2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+  }
+
 .form {
     background-color: white;
     width: 400px;
