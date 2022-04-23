@@ -118,10 +118,10 @@ a {
 /***** Table style *****/
 .tablediv {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 150vh;
-  box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
 }
 
 table {
@@ -134,6 +134,7 @@ table {
 th {
   padding: 15px;
   height: 100px;
+  background-color: rgb(255, 255, 255);
 }
 
 td {
