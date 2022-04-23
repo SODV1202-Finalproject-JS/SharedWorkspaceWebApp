@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<div class="signupForm">
+	<div class="tablediv">
 		<form action="http://localhost:3005/user" method="POST" class="form">
 			<h1>Owner`s Page</h1>
 			<h2>Search for Properties and Workspaces</h2>
@@ -56,7 +56,7 @@
 			<div class="inputContainerOptions">
 				<select id="transit" name="transit" class="inputOptions" required>
 					<option disabled selected>Public Tranportation</option>
-					<option disabled >Choose a option:</option>
+					<option disabled>Choose a option:</option>
 					<option value="Available">Available</option>
 					<option value="Unavailable">Unavailable</option>
 				</select>
@@ -76,29 +76,29 @@
 
 			});
 	</script>
-	
+
 	<script>
-   form.addEventListener("submit", (event) => {
-	event.preventDefault();
-	const url = "http://localhost:3005/login";
-	const userData = {
-		email: form.email.value,
-		password: form.password.value
-	}
-	fetch("http://localhost:3005/login", {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(userData),
-	}).then(response => response.json())
-	.then(data => {
-		httpResponse.handleResponse(data);
-	})
-	.catch((error) => {
-		httpResponse.handleResponse(error);
-	})  
-</script>
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const url = "http://localhost:3005/login";
+			const userData = {
+				email: form.email.value,
+				password: form.password.value
+			}
+			fetch("http://localhost:3005/login", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(userData),
+			}).then(response => response.json())
+				.then(data => {
+					httpResponse.handleResponse(data);
+				})
+				.catch((error) => {
+					httpResponse.handleResponse(error);
+				})  
+	</script>
 
 
 </body>
