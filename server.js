@@ -100,8 +100,9 @@ function Newuser(req, res) {
 const userAuth = {
     userLogged: false,
     userID: "",
-    username: "",
-    useremail: ""
+    userName: "",
+    userEmail: "",
+    userRole: ""
 };
 
 //Checks if the user is logged in
@@ -131,8 +132,9 @@ app.post('/login',  (req, res) => {
                 //Auth
                 userAuth.userLogged = true;
                 userAuth.userID = i;
-                userAuth.username = obj.user[i].name;
-                userAuth.useremail = obj.user[i].email;
+                userAuth.userName = obj.user[i].name;
+                userAuth.userEmail = obj.user[i].email;
+                userAuth.userRole = obj.user[i].role;
                 
                 loginResponse.success = true;
                 loginResponse.message = 'Login success';
@@ -179,8 +181,9 @@ app.post('/logout', (req, res) => {
     if(isLoggedIn()){
         //Logout
         userAuth.userLogged = false;
-        userAuth.username = "";
-        userAuth.useremail = "";
+        userAuth.userName = "";
+        userAuth.userEmail = "";
+        userAuth.userRole = "";
         
         res.redirect("http://localhost:3005/login");
     } else {
