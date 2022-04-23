@@ -76,6 +76,30 @@
 
 			});
 	</script>
+	
+	<script>
+   form.addEventListener("submit", (event) => {
+	event.preventDefault();
+	const url = "http://localhost:3005/login";
+	const userData = {
+		email: form.email.value,
+		password: form.password.value
+	}
+	fetch("http://localhost:3005/login", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(userData),
+	}).then(response => response.json())
+	.then(data => {
+		httpResponse.handleResponse(data);
+	})
+	.catch((error) => {
+		httpResponse.handleResponse(error);
+	})  
+</script>
+
 
 </body>
 
