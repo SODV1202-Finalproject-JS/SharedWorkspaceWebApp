@@ -192,6 +192,13 @@ app.post('/logout', (req, res) => {
 })
 //End logout area -------
 
+//Workspace area -------
+app.get('/workspace', function (req, res) {
+    res.sendFile(__dirname + "/pages/workspace.html");
+});
+//End Workspace area --------
+
+
 //Add workspace area ---------
 app.get('/addworkspace', function (req, res) {
     if(isLoggedIn()){
