@@ -98,11 +98,11 @@ function Newuser(req, res) {
 
 //Login area ----------------
 const userAuth = {
-    userLogged: false,
+    userLogged: true,
     userID: "",
     userName: "",
     userEmail: "",
-    userRole: ""
+    userRole: "coworker"
 };
 
 //Checks if the user is logged in

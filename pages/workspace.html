@@ -107,4 +107,33 @@
         </form>
     </div>
 </body>
+<script>
+    const BtnsRight = document.querySelectorAll('.BtnsRight');
+
+    const fetchResponse = {
+        handleResponse(response){
+            if(response.userLogged == true){
+               if(response.userRole == "coworker"){
+                    BtnsRight.forEach(button => {
+                        button.style.display = "none";
+                    })
+               }
+               else{
+                    BtnsRight.forEach(button => {
+                        button.style.display = "block";
+                    })
+               }
+            }
+        }
+    }
+
+    fetch("http://localhost:3005/auth")
+    .then(response => response.json())
+        .then(data => {
+            fetchResponse.handleResponse(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+</script>
 </html>
