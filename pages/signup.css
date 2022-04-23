@@ -120,7 +120,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 150vh;
   box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
 }
 
