@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 
 app.get('/signup', function (req, res) {
     if(isLoggedIn()){
-        res.sendFile(__dirname + "/pages/home.html");
+        res.redirect("http://localhost:3005/home");
     } else {
         res.sendFile(__dirname + "/pages/" + "signup.html");
     }
@@ -57,6 +57,7 @@ function Newuser(req, res) {
     } else {
         if(response.role == "owner"){
             obj.user.push({
+                userID: (obj.user.length + 1),
                 name: req.body.name,
                 phone: req.body.phone,
                 email: req.body.email,
@@ -66,11 +67,11 @@ function Newuser(req, res) {
             });
         } else {
             obj.user.push({
+                userID: (obj.user.length + 1),
                 name: req.body.name,
                 phone: req.body.phone,
                 email: req.body.email,
                 role: req.body.role,
-                contracts: [],
                 password: req.body.password
             });
         }
@@ -99,9 +100,9 @@ function Newuser(req, res) {
 //Login area ----------------
 const userAuth = {
     userLogged: true,
-    userID: "",
-    userName: "",
-    userEmail: "",
+    userID: 3,
+    userName: "Mara Whitley",
+    userEmail: "turpis.nulla@google.ca",
     userRole: "coworker"
 };
 
@@ -111,7 +112,11 @@ function isLoggedIn(){
 }
 
 app.get('/login', function (req, res) {
-    res.sendFile(__dirname + "/pages/login.html");
+    if(isLoggedIn()){
+        res.redirect("http://localhost:3005/home");
+    } else {
+        res.sendFile(__dirname + "/pages/login.html");
+    }
 });
 
 app.post('/login',  (req, res) => {
@@ -131,7 +136,7 @@ app.post('/login',  (req, res) => {
                 
                 //Auth
                 userAuth.userLogged = true;
-                userAuth.userID = i;
+                userAuth.userID = obj.user[i].userID;
                 userAuth.userName = obj.user[i].name;
                 userAuth.userEmail = obj.user[i].email;
                 userAuth.userRole = obj.user[i].role;
@@ -192,6 +197,16 @@ app.post('/logout', (req, res) => {
 })
 //End logout area -------
 
+//Workspace list area --------
+app.get('/workspacelist', function (req, res) {
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/table.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+});
+//End workspace list area --------
+
 //Workspace area -------
 app.get('/workspace', function (req, res) {
     res.sendFile(__dirname + "/pages/workspace.html");
@@ -208,37 +223,42 @@ app.get('/addworkspace', function (req, res) {
     }
 });
 
-app.post('/worksent', urlencodedParser, Newwork);
-
-function Newwork(req, res) {
+app.post('/workspacesent', (req, res) => {
     const mydata = fs.readFileSync('user_file.json', 'utf8');
     obj = JSON.parse(mydata);
     response = {
         name: req.body.name,
-        building_id: req.body.building_id,
         workspace_id: req.body.workspace_id,
         address: req.body.address,
         neighborhood: req.body.neighborhood,
         size: req.body.size,
         garage: req.body.garage,
-        transit: req.body.transit
+        transit: req.body.transit,
+        type: req.body.type,
+        price: req.body.price,
+        smoke: req.body.smoke,
+        fromDate: req.body.fromDate,
+        toDate: req.body.toDate
     }
-    if (!response.name || !response.building_id || !response.workspace_id || !response.address || !response.neighborhood || !response.size || !response.garage || !response.transit) {
-        reply = {
-            msg: "Please complete the form before you submit it"
-        }
-        res.send(reply);
-        console.log(reply)
+    if (!response.name || !response.workspace_id || !response.address || !response.neighborhood || !response.size || !response.garage || !response.transit || !response.type || !response.price || !response.smoke || !response.fromDate || !response.toDate)  {
+        res.send({
+            success: false,
+            message: "Workspace not added!"
+        });
     } else {
-        obj.user[userAuth.userID].workspaces.push({
+        obj.user[userAuth.userID - 1].workspaces.push({
             name: req.body.name,
-            building_id: req.body.building_id,
             workspace_id: req.body.workspace_id,
             address: req.body.address,
             neighborhood: req.body.neighborhood,
             size: req.body.size,
             garage: req.body.garage,
-            transit: req.body.transit
+            transit: req.body.transit,
+            type: req.body.workspacetype,
+            price: req.body.price,
+            smoke: req.body.smoke,
+            fromDate: req.body.fromDate,
+            toDate: req.body.toDate
         });
 
         let data = JSON.stringify(obj, null, 2);
@@ -248,21 +268,29 @@ function Newwork(req, res) {
         function finished(err) {
             reply = {
                 name: req.body.name,
-                building_id: req.body.building_id,
                 workspace_id: req.body.workspace_id,
                 address: req.body.address,
                 neighborhood: req.body.neighborhood,
                 size: req.body.size,
                 garage: req.body.garage,
                 transit: req.body.transit,
+                type: req.body.workspacetype,
+                price: req.body.price,
+                smoke: req.body.smoke,
+                fromDate: req.body.fromDate,
+                toDate: req.body.toDate,
                 status: "success",
                 msg: "thank you"
             }
             console.log(reply);
         }
+        res.send({
+            success: true,
+            message: "Workspace added successfully!"
+        });
     }
-    res.redirect("http://localhost:3005/addworkspace");
-}
+});
+
 //End add workspace area ---------
 
 

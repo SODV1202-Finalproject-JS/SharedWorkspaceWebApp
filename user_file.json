@@ -1,47 +1,41 @@
 {
   "user": [
     {
+      "userID": 1,
       "name": "Allegra Mckinney",
       "phone": "1-974-511-6147",
       "email": "ipsum.porta@aol.org",
       "role": "owner",
-      "workspaces": [
-        {
-          "name": "Per Conubia Corporation",
-          "building_id": "1",
-          "workspace_id": "1",
-          "address": "Ap #449-6885 At Rd.",
-          "neighborhood": "East Java",
-          "size": "526",
-          "garage": "Available",
-          "transit": "Available"
-        }
-      ],
+      "workspaces": [],
       "password": "460992"
     },
     {
+      "userID": 2,
       "name": "John Winters",
       "phone": "(921) 853-7258",
       "email": "phasellus.libero@icloud.edu",
       "role": "coworker",
-      "contracts": [],
       "password": "622570"
     },
     {
+      "userID": 3,
       "name": "Mara Whitley",
       "phone": "1-425-887-0724",
       "email": "turpis.nulla@google.ca",
       "role": "owner",
       "workspaces": [
         {
-          "name": "Ac Mattis",
-          "building_id": "1",
+          "name": "Per Conubia Corporation",
           "workspace_id": "1",
-          "address": "P.O. Box 679, 4098 Ac St.",
-          "neighborhood": "Derbyshire",
-          "size": "307",
-          "garage": "Available",
-          "transit": "Unavailable"
+          "address": "39 Art eest",
+          "neighborhood": "Western Cape",
+          "size": "205",
+          "garage": "With garage",
+          "transit": "Available",
+          "price": "Individual",
+          "smoke": "Smoke Allowed",
+          "fromDate": "2022-04-01",
+          "toDate": "2022-04-30"
         }
       ],
       "password": "609510"
