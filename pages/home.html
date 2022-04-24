@@ -15,7 +15,8 @@
             <h2></h2>
             <br><br>    
             <input type="submit" value="Logout" class="submit">
-            <a href="http://localhost:3005/workspacelist" class="submit">Workspaces List</a> 
+            <a href="http://localhost:3005/workspacelist" class="submit" id="workspace-list">My Workspaces List</a> 
+            <a href="http://localhost:3005/searchworkspace" class="submit" id="search-workspace">Search Workspace</a> 
         </form>
     </div>
 </body>
@@ -23,8 +24,17 @@
     const fetchResponse = {
         handleResponse(response){
             if(response.userLogged == true){
-               const h2 = document.querySelector('h2');
-               h2.innerText = `Welcome ${response.userName}`; 
+                const h2 = document.querySelector('h2');
+                h2.innerText = `Welcome ${response.userName}`; 
+                if(response.userRole == "owner"){
+                    const searchWorkspace = document.getElementById("search-workspace");
+                    searchWorkspace.style.display = "none";
+                    searchWorkspace.style.visibility = "hidden";
+                } else {
+                    const workspaceList = document.getElementById("workspace-list");
+                    workspaceList.style.display = "none";
+                    workspaceList.style.visibility = "hidden";
+                }
             }
         }
     }

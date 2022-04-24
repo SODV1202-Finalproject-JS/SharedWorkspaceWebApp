@@ -101,8 +101,8 @@ function Newuser(req, res) {
 const userAuth = {
     userLogged: true,
     userID: 3,
-    userName: "Mara Whitley",
-    userEmail: "turpis.nulla@google.ca",
+    userName: "Allegra Mckinney",
+    userEmail: "ipsum.porta@aol.org",
     userRole: "coworker"
 };
 
@@ -200,19 +200,46 @@ app.post('/logout', (req, res) => {
 //Workspace list area --------
 app.get('/workspacelist', function (req, res) {
     if(isLoggedIn()){
-        res.sendFile(__dirname + "/pages/table.html");
+        res.sendFile(__dirname + "/pages/workspacelist.html");
     } else {
         res.redirect("http://localhost:3005/login");
     }
 });
+
+app.get('/getworkspacelist', function (req, res) {
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
+    res.send(obj.user[userAuth.userID - 1].workspaces);
+});
+
+app.delete('/deleteworkspace', function (req, res) {
+    const workspaceIndex = req.body.index;
+    const mydata = fs.readFileSync('user_file.json', 'utf8');
+    obj = JSON.parse(mydata);
+    obj.user[userAuth.userID - 1].workspaces.splice(workspaceIndex, 1);
+
+    let data = JSON.stringify(obj);
+    fs.writeFile('user_file.json', data, () => {
+
+        console.log('user_file.JSON is updated');
+    
+        res.send({
+            message: "Workspace deleted successfully!"
+        })
+    });
+
+});
 //End workspace list area --------
 
-//Workspace area -------
-app.get('/workspace', function (req, res) {
-    res.sendFile(__dirname + "/pages/workspace.html");
+//Filtered workspace list area --------
+app.get('/filteredworkspace', function (req, res) {
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/filteredworkspace.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
 });
-//End Workspace area --------
-
+//Filtered workspace list area --------
 
 //Add workspace area ---------
 app.get('/addworkspace', function (req, res) {
@@ -263,7 +290,7 @@ app.post('/workspacesent', (req, res) => {
 
         let data = JSON.stringify(obj, null, 2);
         fs.writeFile('user_file.json', data, finished);
-        console.log('user_file.JSON is updated')
+        console.log('user_file.JSON is updated');
 
         function finished(err) {
             reply = {
@@ -293,7 +320,70 @@ app.post('/workspacesent', (req, res) => {
 
 //End add workspace area ---------
 
+//Search workspace area --------
+app.get('/searchworkspace', function (req, res) {
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/" + "searchworkspace.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+});
 
+const usedFilter ={
+    filter: {}
+}
+
+const filtered = {
+    workspaces: []
+}
+
+app.post('/filter', function (req, res){
+    if(isLoggedIn()){
+        usedFilter.filter = req.body;
+        const mydata = fs.readFileSync('user_file.json', 'utf8');
+        obj = JSON.parse(mydata);
+        const allWorkspaces = [];
+        obj.user.forEach(element => {
+            if(element.role == "owner"){
+                element.workspaces.forEach(workspace => {
+                    allWorkspaces.push(workspace);
+                })
+            }
+        });
+        filtered.workspaces = allWorkspaces.filter((item) =>{
+            for(let key in usedFilter.filter){
+                if(item[key] === undefined || item[key] != usedFilter.filter[key]){
+                    return false;
+                }
+                return true;
+            }
+        });
+        const filterResponse = {
+            success: (filtered.workspaces.length < 1) ? false :  true,
+            message: (filtered.workspaces.length < 1) ?  "No workspace found!" : "Workspaces found!" 
+        }
+        res.send(filterResponse);
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+});
+
+app.get('/getfilteredworkspaces', function (req, res){
+    if(isLoggedIn()){
+        res.send(filtered.workspaces);
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+})
+
+app.get('/filteredworkspace', function(req, res){
+    if(isLoggedIn()){
+        res.sendFile(__dirname + "/pages/" + "filteredworkspace.html");
+    } else {
+        res.redirect("http://localhost:3005/login");
+    }
+})
+//End search workspace area --------
 
 var server = app.listen(3005, function () {
     var host = server.address().address

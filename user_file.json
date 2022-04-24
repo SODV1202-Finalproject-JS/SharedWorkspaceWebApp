@@ -6,7 +6,22 @@
       "phone": "1-974-511-6147",
       "email": "ipsum.porta@aol.org",
       "role": "owner",
-      "workspaces": [],
+      "workspaces": [
+        {
+          "name": "Convallis Dolor Inc.",
+          "workspace_id": "1",
+          "address": "Ap #300-9641 Pellentesque Rd.",
+          "neighborhood": "Vĩnh Long",
+          "size": "33",
+          "garage": "With garage",
+          "transit": "Available",
+          "type": "private",
+          "price": "Individual",
+          "smoke": "Smoke Allowed",
+          "fromDate": "2022-02-11",
+          "toDate": "2023-09-22"
+        }
+      ],
       "password": "460992"
     },
     {
@@ -32,10 +47,39 @@
           "size": "205",
           "garage": "With garage",
           "transit": "Available",
+          "type": "private",
           "price": "Individual",
           "smoke": "Smoke Allowed",
           "fromDate": "2022-04-01",
           "toDate": "2022-04-30"
+        },
+        {
+          "name": "Nibh Vulputate LLP",
+          "workspace_id": "2",
+          "address": "628-6622 Mauris Avenuet",
+          "neighborhood": "Cumberland",
+          "size": "335",
+          "garage": "With garage",
+          "transit": "Available",
+          "type": "office room",
+          "price": "Individual",
+          "smoke": "Smoke Allowed",
+          "fromDate": "2022-07-01",
+          "toDate": "2023-07-22"
+        },
+        {
+          "name": "Torquent Per Associates",
+          "workspace_id": "3",
+          "address": "737-8145 Lacinia Road",
+          "neighborhood": "O'Higgins",
+          "size": "44",
+          "garage": "No garage",
+          "transit": "Unavailable",
+          "type": "office room",
+          "price": "Individual",
+          "smoke": "Smoke Allowed",
+          "fromDate": "2022-05-25",
+          "toDate": "2023-02-07"
         }
       ],
       "password": "609510"

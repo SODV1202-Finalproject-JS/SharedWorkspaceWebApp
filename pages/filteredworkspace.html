@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signup.css">
+    <title>Filtered Workspaces</title>
+</head>
+
+<body>
+
+    <div id="options">
+        <a href="http://localhost:3005/home" class="submit">Home</a>
+        <a href="http://localhost:3005/searchworkspace" class="submit">Search Workspace</a>        
+    </div>
+    <div class="tablediv">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Workspace ID</th>
+                    <th>Address</th>
+                    <th>Neighborhood</th>
+                    <th>Size (square feet)</th>
+                    <th>Parking garage</th>
+                    <th>Public Transportation</th>
+                    <th>Workspace Type</th>
+                    <th>Price Available</th>
+                    <th>Smoker</th>
+                    <th>Lease period</th>
+                    <!-- <th>Availability period</th> -->
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    function updateView(){
+        const fetchResponse = {
+            handleResponse(workspaces){
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = "";
+                workspaces.forEach((workspace) => {
+                    
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${workspace.workspace_id}</td>
+                        <td>${workspace.name}</td>
+                        <td>${workspace.address}</td>
+                        <td>${workspace.neighborhood}</td>
+                        <td>${workspace.size}</td>
+                        <td>${workspace.garage}</td>
+                        <td>${workspace.transit}</td>
+                        <td>${workspace.type}</td>
+                        <td>${workspace.price}</td>
+                        <td>${workspace.smoke}</td>
+                        <td>${workspace.fromDate} - ${workspace.toDate}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        };
+    
+        fetch("http://localhost:3005/getfilteredworkspaces")
+        .then(response => response.json())
+            .then(data => {
+                fetchResponse.handleResponse(data)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+    updateView();
+</script>
+
+</html>

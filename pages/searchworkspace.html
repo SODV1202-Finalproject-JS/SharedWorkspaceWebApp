@@ -2,105 +2,157 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Owner Search Page</title>
-	<link rel="stylesheet" href="signup.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Workspace</title>
+    <link rel="stylesheet" href="signup.css">
 </head>
 
 <body>
-	<div class="tablediv">
-		<form action="http://localhost:3005/user" method="POST" class="form">
-			<h1>Owner`s Page</h1>
-			<h2>Search for Properties and Workspaces</h2>
+    <div id="divBack" class="signupForm2">
+        <div>
+            <form class="form">
+                <h2>Search Workspace</h2>
+                <h4 id="done"></h4>
+    
+                <div class="inputContainer">
+                    <input type="text" name="name" class="input" placeholder="Name: ">
+                    <label for="name" class="label"></label>
+                </div>
+    
+                <div class="inputContainer">
+                    <input type="text" name="workspace_id" class="input" placeholder="Workspace ID: ">
+                    <label for="workspace_id" class="label"></label>
+                </div>
+    
+                <div class="inputContainer">
+                    <input type="text" name="address" class="input" placeholder="Address: ">
+                    <label for="address" class="label"></label>
+                </div>
+    
+                <div class="inputContainer">
+                    <input type="text" name="neighborhood" class="input" placeholder="Neighborhood: ">
+                    <label for="neighborhood" class="label"></label>
+                </div>
+    
+                <div class="inputContainer">
+                    <input type="text" name="size" class="input" placeholder="Size (square feet): ">
+                    <label for="size" class="label"></label>
+                </div>
+    
+                <div class="inputContainerOptions">
+                    <select id="garage" name="garage" class="inputOptions" placeholder="Parking garage: ">
+                        <option disabled value="" selected>Parking Garage:</option>
+                        <option disabled>Choose...</option>
+                        <option value="With garage">With garage</option>
+                        <option value="No garage">No garage</option>
+                    </select>
+                    <label for="garage" class="label"></label>
+                </div>
+    
+                <div class="inputContainerOptions">
+                    <select id="transit" name="transit" class="inputOptions" placeholder="Public Transportation: ">
+                        <option disabled value="" selected>Public Transportation:</option>
+                        <option disabled>Choose...</option>
+                        <option value="Available">Available</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                    <label for="transit" class="label"></label>
+                </div>
+    
+                <div class="inputContainerOptions">
+                    <select id="wstype" name="type" class="inputOptions" placeholder="Workspace Type: ">
+                        <option disabled value="" selected>Workspace Type:</option>
+                        <option disabled>Choose...</option>
+                        <option value="Meeting room">Meeting room</option>
+                        <option value="Private">Private</option>
+                        <option value="Office room">Office room</option>
+                        <option value="Open area">Open area</option>
+                    </select>
+                    <label for="wstype" class="label"></label>
+                </div>
+    
+                <br>
+    
+                <div class="inputContainerOptions">
+                    <select id="price" name="price" class="inputOptions" placeholder="Prices: ">
+                        <option disabled value="" selected>Prices Available:</option>
+                        <option disabled>Choose options...</option>
+                        <option value="Individual">Individual - $ 25.00</option>
+                        <option value="Double">Double - $ 45.00</option>
+                        <option value="Group">Group seats 3 to 5 - $ 99.00</option>
+                        <option value="Conference">Conference seats 6 to 10 - $150.00</option>
+                    </select>
+                    <label for="transit" class="label"></label>
+                </div>
+    
+                <div class="inputContainerOptions">
+                    <select id="smoke" name="smoke" class="inputOptions" placeholder="Smoker: ">
+                        <option disabled value="" selected>Smoker: </option>
+                        <option disabled>Choose...</option>
+                        <option value="Smoke Allowed">Smoke Allowed</option>
+                        <option value="Smoke Free">Smoke Free</option>
+                    </select>
+                    <label for="smoke" class="label"></label>
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="lease" class="label">Lease period: </label>
+                    <input type="date" name="fromDate" max="" id="fromDate" placeholder="Lease Term From:" class="input">
 
-			<div class="inputContainer">
-				<input type="text" name="name" class="input" placeholder="Name">
-				<label for="name"></label>
-			</div>
-
-			<div class="inputContainer">
-				<input type="text" name="building_id" class="input" placeholder="Building ID">
-				<label for="building_id"></label>
-			</div>
-
-			<div class="inputContainer">
-				<input type="text" name="workspace_id" class="input" placeholder="Workspace ID">
-				<label for="workspace_id"></label>
-			</div>
-
-			<div class="inputContainer">
-				<input type="text" name="address" class="input" placeholder="Address">
-				<label for="address"></label>
-			</div>
-
-			<div class="inputContainer">
-				<input type="text" name="neighborhood" class="input" placeholder="Neighborhood">
-				<label for="neighborhood"></label>
-			</div>
-
-			<div class="inputContainer">
-				<input type="text" name="size" class="input" placeholder="Size (square feet)">
-				<label for="size"></label>
-			</div>
-
-			<div class="inputContainerOptions">
-				<select id="garage" name="garage" class="inputOptions" required>
-					<option disabled selected>Parking garage</option>
-					<option disabled>Choose a option:</option>
-					<option value="Available">Available</option>
-					<option value="Unavailable">Unavailable</option>
-				</select>
-				<label for="garage"></label>
-			</div>
-
-			<div class="inputContainerOptions">
-				<select id="transit" name="transit" class="inputOptions" required>
-					<option disabled selected>Public Tranportation</option>
-					<option disabled>Choose a option:</option>
-					<option value="Available">Available</option>
-					<option value="Unavailable">Unavailable</option>
-				</select>
-				<label for="transit"></label>
-			</div>
-			<input type="submit" value="Search" class="submit" style="float:right">
-		</form>
-	</div>
-
-	<script>
-		fetch("./user_file.json")
-			.then(function (resp) {
-				return resp.json();
-			})
-			.then(function (data) {
-				console.log(data);
-
-			});
-	</script>
-
-	<script>
-		form.addEventListener("submit", (event) => {
-			event.preventDefault();
-			const url = "http://localhost:3005/login";
-			const userData = {
-				email: form.email.value,
-				password: form.password.value
-			}
-			fetch("http://localhost:3005/login", {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(userData),
-			}).then(response => response.json())
-				.then(data => {
-					httpResponse.handleResponse(data);
-				})
-				.catch((error) => {
-					httpResponse.handleResponse(error);
-				})  
-	</script>
-
-
+                    <input type="date" name="toDate" min="" id="toDate" placeholder="To Date:" class="input">
+                    <label class="label"></label>
+                </div>
+                <br><br><br><br>
+                <div>
+                    <div class="BtnsLeft">
+                        <input type="submit" value="Search Workspace" class="submit" id="searchWorkspace">
+                        <a href="http://localhost:3005/home" class="submit">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+<script>
+    const form = document.querySelector('.form');   
 
+
+    const httpResponse = {
+        handleResponse(response) {
+            if(response.success == true){
+                alert(response.message);
+                window.location.replace("http://localhost:3005/filteredworkspace");
+            }else {
+                alert(response.message);
+            }
+        }
+    }
+
+    form.addEventListener("submit", (e)=> {
+        e.preventDefault();
+        const url = "http://localhost:3005/filter";
+        const filterWorkspace = {}
+		Array.from(form.elements).forEach((input) => {
+			if(input.value != "" && input.name){
+				filterWorkspace[String(input.name)] = input.value;
+			}
+		});
+		
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(filterWorkspace),
+        }).then(response => response.json())
+            .then(data => {
+                httpResponse.handleResponse(data);
+            })
+            .catch((error) => {
+                httpResponse.handleResponse(error);
+            })
+    });
+</script>
 </html>
