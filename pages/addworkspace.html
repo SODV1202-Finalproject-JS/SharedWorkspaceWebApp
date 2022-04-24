@@ -10,38 +10,48 @@
 </head>
 
 <body>
+
+    <div class="header">
+        <a href="">Shared WorkSpace</a>
+    </div>
+
+    <div class="header-right">
+        <a href="http://localhost:3005/home">Home</a>
+        <a>Workspaces</a>
+        <a>Logout</a>
+     </div>
+
     <div id="divBack" class="signupForm2">
         <div>
-            <a href="http://localhost:3005/home" class="submit">Home</a>
             <form class="form">
                 <h2>Add Workspace</h2>
                 <h4 id="done"></h4>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="name" class="input" placeholder="Name: ">
                     <label for="name" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="workspace_id" class="input" placeholder="Workspace ID: ">
                     <label for="workspace_id" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="address" class="input" placeholder="Address: ">
                     <label for="address" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="neighborhood" class="input" placeholder="Neighborhood: ">
                     <label for="neighborhood" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="size" class="input" placeholder="Size (square feet): ">
                     <label for="size" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="garage" name="garage" class="inputOptions" placeholder="Parking garage: " required>
                         <option disabled value="" selected>Parking Garage:</option>
@@ -51,9 +61,10 @@
                     </select>
                     <label for="garage" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
-                    <select id="transit" name="transit" class="inputOptions" placeholder="Public Transportation: " required>
+                    <select id="transit" name="transit" class="inputOptions" placeholder="Public Transportation: "
+                        required>
                         <option disabled value="" selected>Public Transportation:</option>
                         <option disabled>Choose...</option>
                         <option value="Available">Available</option>
@@ -61,9 +72,10 @@
                     </select>
                     <label for="transit" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
-                    <select id="wstype" name="workspacetype" class="inputOptions" placeholder="Workspace Type: " required>
+                    <select id="wstype" name="workspacetype" class="inputOptions" placeholder="Workspace Type: "
+                        required>
                         <option disabled value="" selected>Workspace Type:</option>
                         <option disabled>Choose...</option>
                         <option value="Meeting room">Meeting room</option>
@@ -73,9 +85,7 @@
                     </select>
                     <label for="wstype" class="label"></label>
                 </div>
-    
-                <br>
-    
+
                 <div class="inputContainerOptions">
                     <select id="price" name="price" class="inputOptions" placeholder="Prices: " required>
                         <option disabled value="" selected>Prices Available:</option>
@@ -87,7 +97,7 @@
                     </select>
                     <label for="transit" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="smoke" name="smoke" class="inputOptions" placeholder="Smoker: " required>
                         <option disabled value="" selected>Smoker: </option>
@@ -97,40 +107,38 @@
                     </select>
                     <label for="smoke" class="label"></label>
                 </div>
-                <br>
+                
                 <div class="inputContainer">
                     <label for="lease" class="label">Lease period: </label>
-                    <input type="date" name="fromDate" max="" id="fromDate" placeholder="Lease Term From:" class="input">
+                    <input type="date" name="fromDate" max="" id="fromDate" placeholder="Lease Term From:"
+                        class="input">
 
                     <input type="date" name="toDate" min="" id="toDate" placeholder="To Date:" class="input">
                     <label class="label"></label>
                 </div>
                 <br><br><br><br>
-                <div>
-                    <div class="BtnsLeft">
-                        <input type="submit" value="Add Workspace" class="submit" id="addWorkspace">
-                        <a href="http://localhost:3005/workspacelist" class="submit">Cancel</a>
-                    </div>
-                </div>
+                <input type="submit" value="Add Workspace" class="submit" id="addWorkspace">
+                <input type="button" class="submit" onclick="location.href='http://localhost:3005/home'" value="Home">
+                <input type="button" class="submit" onclick="location.href='http://localhost:3005/workspacelist'" value="Cancel">
             </form>
         </div>
     </div>
 </body>
 <script>
-    const form = document.querySelector('.form');    
+    const form = document.querySelector('.form');
 
     const httpResponse = {
         handleResponse(response) {
-            if(response.success == true){
+            if (response.success == true) {
                 alert(response.message);
                 window.location.replace("http://localhost:3005/workspacelist");
-            }else {
+            } else {
                 alert(response.message);
             }
         }
     }
 
-    form.addEventListener("submit", (e)=> {
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
         const url = "http://localhost:3005/workspacesent";
         const workspaceData = {
@@ -148,12 +156,12 @@
             toDate: form.toDate.value
         }
         fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(workspaceData),
-        }).then(response => response.json())
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(workspaceData),
+            }).then(response => response.json())
             .then(data => {
                 httpResponse.handleResponse(data);
             })
@@ -162,4 +170,5 @@
             })
     });
 </script>
+
 </html>

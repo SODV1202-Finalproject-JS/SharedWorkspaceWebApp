@@ -10,6 +10,17 @@
 </head>
 
 <body>
+
+    <div class="header">
+        <a href="">Shared WorkSpace</a>
+    </div>
+
+    <div class="header-right">
+        <a href="http://localhost:3005/home">Home</a>
+        <a>Workspaces</a>
+        <a>Logout</a>
+     </div>
+
     <div id="divBack" class="signupForm2">
         <div>
             <form class="form">
@@ -73,8 +84,6 @@
                     <label for="wstype" class="label"></label>
                 </div>
     
-                <br>
-    
                 <div class="inputContainerOptions">
                     <select id="price" name="price" class="inputOptions" placeholder="Prices: ">
                         <option disabled value="" selected>Prices Available:</option>
@@ -96,7 +105,7 @@
                     </select>
                     <label for="smoke" class="label"></label>
                 </div>
-                <br>
+
                 <div class="inputContainer">
                     <label for="lease" class="label">Lease period: </label>
                     <input type="date" name="fromDate" max="" id="fromDate" placeholder="Lease Term From:" class="input">
@@ -108,7 +117,7 @@
                 <div>
                     <div class="BtnsLeft">
                         <input type="submit" value="Search Workspace" class="submit" id="searchWorkspace">
-                        <a href="http://localhost:3005/home" class="submit">Cancel</a>
+                        <input type="button" class="submit" onclick="location.href='http://localhost:3005/workspacelist'" value="Cancel">
                     </div>
                 </div>
             </form>

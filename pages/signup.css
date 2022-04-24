@@ -32,7 +32,7 @@ body {
 
 .form {
   background-color: white;
-  width: 400px;
+  width: 407px;
   border-radius: 8px;
   padding: 20px 40px;
   box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
@@ -92,9 +92,10 @@ body {
   font-size: 16px;
   margin: 10px 5px 0 5px;
   transition: 0.2s;
-  width: 46.9%;
+  width: 47%;
   justify-content: center;
   display: inline;
+  text-align: center;
 }
 
 .submit:hover {
@@ -113,7 +114,12 @@ h3 {
 
 a {
   text-decoration: none;
+  color: black;
+  padding: 5px 20px 5px 20px;
+  border-radius: 6px;
+  transition: 0.2s;
 }
+
 
 /***** Table style *****/
 .tablediv {
@@ -146,3 +152,30 @@ td {
 tr:hover {
   background-color: rgb(247, 247, 247);
 }
+
+/* Test Header */
+
+.header {
+  position: absolute;
+  padding: 20px 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+
+.header-right {
+  position: absolute;
+  font-size: 18px;
+  color: black;
+  right: 0;
+  padding: 20px 20px;
+
+
+}
+
+.header-right a:hover {
+  background-color: rgb(39, 39, 39);
+  color: white;
+  cursor: pointer;
+}
+

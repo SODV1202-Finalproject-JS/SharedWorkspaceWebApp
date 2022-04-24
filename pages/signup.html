@@ -10,27 +10,30 @@
 </head>
 
 <body>
+
+   <div class="header">
+      <a href="">Shared WorkSpace</a>
+   </div>
+
    <div id="divBack" class="signupForm">
       <form action="http://localhost:3005/user" method="POST" class="form">
+
          <h2 class="tittle">User Registration Form</h2>
 
          <div class="inputContainer">
             <input type="text" name="name" class="input" placeholder="Name: ">
             <label for="name" class="label"></label>
          </div>
-         <br>
 
          <div class="inputContainer">
             <input type="text" name="phone" class="input" placeholder="Phone: ">
             <label for="phone" class="label"></label>
          </div>
-         <br>
 
          <div class="inputContainer">
             <input type="text" name="email" class="input" placeholder="Email: ">
             <label for="email" class="label"></label>
          </div>
-         <br>
 
          <div class="inputContainerOptions">
             <select id="role" name="role" class="inputOptions" required placeholder="Registration Type: ">
@@ -40,13 +43,11 @@
             </select>
             <label for="role" class="label"></label>
          </div>
-         <br>
 
          <div class="inputContainer">
             <input type="password" name="password" class="input" placeholder="Password: ">
             <label for="password" class="label"></label>
          </div>
-         <br>
 
          <input type="submit" value="Submit" class="submit">
    </div>
