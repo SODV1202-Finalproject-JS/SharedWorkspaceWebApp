@@ -182,7 +182,7 @@ tr:hover{
 /* Test Header */
 
 .header {
-  position: absolute;
+  position: fixed;
   padding: 20px 10px;
   font-size: 25px;
   font-weight: bold;
@@ -190,7 +190,7 @@ tr:hover{
 
 
 .header-right {
-  position: absolute;
+  position: fixed;
   font-size: 18px;
   color: black;
   right: 0;
