@@ -100,10 +100,10 @@ function Newuser(req, res) {
 //Login area ----------------
 const userAuth = {
     userLogged: true,
-    userID: 3,
-    userName: "Allegra Mckinney",
-    userEmail: "ipsum.porta@aol.org",
-    userRole: "coworker"
+    userID: "",
+    userName: "",
+    userEmail: "",
+    userRole: ""
 };
 
 //Checks if the user is logged in
