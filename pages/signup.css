@@ -175,8 +175,13 @@ td {
   text-align: center;
 }
 
+tr{
+  transition: 0.15s;
+}
+
 tr:hover{
   background-color: rgb(247, 247, 247);
+  cursor: pointer;
 }
 
 /* Test Header */
