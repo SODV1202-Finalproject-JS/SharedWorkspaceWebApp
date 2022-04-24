@@ -103,6 +103,27 @@ body {
   cursor: pointer;
 }
 
+.submitDel {
+  margin-left: auto;
+  padding: 5px 10px;
+  border: none;
+  background-color: rgb(39, 39, 39);
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  margin: 5px 5px 0 5px;
+  transition: 0.2s;
+  width: 47%;
+  justify-content: center;
+  display: inline;
+  text-align: center;
+}
+
+.submitDel:hover {
+  background-color: #7f7f7f;
+  cursor: pointer;
+}
+
 ::placeholder {
   color: #7f7f7f;
   z-index: 2;
@@ -124,10 +145,15 @@ a {
 /***** Table style *****/
 .tablediv {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150px;
+
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 150vh;
+  height: 150vh; */
 }
 
 table {
@@ -149,7 +175,7 @@ td {
   text-align: center;
 }
 
-tr:hover {
+tr:hover{
   background-color: rgb(247, 247, 247);
 }
 

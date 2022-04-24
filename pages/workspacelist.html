@@ -11,10 +11,16 @@
 
 <body>
 
-    <div id="options">
-        <a href="http://localhost:3005/home" class="submit">Home</a>
-        <a href="http://localhost:3005/addworkspace" class="submit">Add Workspace</a>        
+    <div class="header">
+        <a href="">Shared WorkSpace</a>
     </div>
+
+    <div class="header-right">
+        <a href="http://localhost:3005/home">Home</a>
+        <a href="http://localhost:3005/addworkspace">Add Workspace</a>
+        <a>Logout</a>
+    </div>
+
     <div class="tablediv">
         <table>
             <thead>
@@ -30,6 +36,7 @@
                     <th>Price Available</th>
                     <th>Smoker</th>
                     <th>Lease period</th>
+                    <th>Actions</th>
                     <!-- <th>Availability period</th> -->
                 </tr>
             </thead>
@@ -80,7 +87,7 @@
                         <td>${workspace.price}</td>
                         <td>${workspace.smoke}</td>
                         <td>${workspace.fromDate} - ${workspace.toDate}</td>
-                        <td onclick="removeWorkspace(${index})"><button>Delete</button></td>
+                        <td onclick="removeWorkspace(${index})"><button class="submitDel">Delete</button><button class="submitDel">Edit</button></td>
                     `;
                     tbody.appendChild(tr);
                 });
