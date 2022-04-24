@@ -28,6 +28,20 @@ app.get('/', function (req, res) {
     res.send("Welcome to register! Please use http://localhost:3005/signup to open a registration form");
 });
 
+//Login area ----------------
+const userAuth = {
+    userLogged: false,
+    userID: "",
+    userName: "",
+    userEmail: "",
+    userRole: ""
+};
+
+//Checks if the user is logged in
+function isLoggedIn(){
+    return userAuth.userLogged;
+}
+
 //Signup area -------
 
 app.get('/signup', function (req, res) {
@@ -96,20 +110,6 @@ function Newuser(req, res) {
 }
 
 //End signup area --------
-
-//Login area ----------------
-const userAuth = {
-    userLogged: true,
-    userID: "",
-    userName: "",
-    userEmail: "",
-    userRole: ""
-};
-
-//Checks if the user is logged in
-function isLoggedIn(){
-    return userAuth.userLogged;
-}
 
 app.get('/login', function (req, res) {
     if(isLoggedIn()){
