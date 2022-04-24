@@ -12,31 +12,20 @@
 <body>
 
     <div class="header">
-        <a href="">Shared WorkSpace</a>
+        <a>Shared WorkSpace</a>
     </div>
 
     <div class="header-right">
         <a href="http://localhost:3005/home">Home</a>
-        <a>Workspaces</a>
-        <a>Logout</a>
      </div>
 
     <div class="signupForm">
         <form action="http://localhost:3005/logout" method="POST" class="form">
             <h2></h2>
             <br><br>
-
-
             <input type="submit" value="Logout" class="submit">
-
-
-                <!-- <a href="http://localhost:3005/workspacelist" id="workspace-list"><p class="submitLink" >My Workspaces List</p></a> -->
-                <input type="button" class="submit" id="workspace-list" onclick="location.href='http://localhost:3005/workspacelist'" value="My Workspaces">
-                <!-- <a href="http://localhost:3005/searchworkspace" id="search-workspace"><p class="submit" >Search Workspace</p></a> -->
-                <input type="button" class="submit" id="search-workspace" onclick="location.href='http://localhost:3005/searchworkspace'" value="Search Workspace">
-
-
-
+            <input type="button" class="submit" id="workspace-list" onclick="location.href='http://localhost:3005/workspacelist'" value="My Workspaces">
+            <input type="button" class="submit" id="search-workspace" onclick="location.href='http://localhost:3005/searchworkspace'" value="Search Workspace">
         </form>
     </div>
 </body>
