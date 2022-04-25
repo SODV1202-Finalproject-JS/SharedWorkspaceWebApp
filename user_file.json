@@ -138,6 +138,15 @@
         }
       ],
       "password": "1234"
+    },
+    {
+      "userID": 7,
+      "name": "Hector Bernstorff",
+      "phone": "2368852934",
+      "email": "hector.hmb@hotmail.com",
+      "role": "owner",
+      "workspaces": [],
+      "password": "123"
     }
   ]
 }
