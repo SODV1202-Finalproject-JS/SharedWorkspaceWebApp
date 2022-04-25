@@ -16,7 +16,7 @@
           "garage": "With garage",
           "transit": "Available",
           "type": "private",
-          "price": "Individual",
+          "price": "Individual - $25.00",
           "smoke": "Smoke Allowed",
           "fromDate": "2022-02-11",
           "toDate": "2023-09-22"
@@ -48,7 +48,7 @@
           "garage": "With garage",
           "transit": "Available",
           "type": "private",
-          "price": "Individual",
+          "price": "Individual - $25.00",
           "smoke": "Smoke Allowed",
           "fromDate": "2022-04-01",
           "toDate": "2022-04-30"
@@ -62,7 +62,7 @@
           "garage": "With garage",
           "transit": "Available",
           "type": "office room",
-          "price": "Individual",
+          "price": "Individual - $25.00",
           "smoke": "Smoke Allowed",
           "fromDate": "2022-07-01",
           "toDate": "2023-07-22"
@@ -76,7 +76,7 @@
           "garage": "No garage",
           "transit": "Unavailable",
           "type": "office room",
-          "price": "Individual",
+          "price": "Individual - $25.00",
           "smoke": "Smoke Allowed",
           "fromDate": "2022-05-25",
           "toDate": "2023-02-07"
@@ -100,7 +100,7 @@
           "garage": "No garage",
           "transit": "Available",
           "type": "office room",
-          "price": "Double",
+          "price": "Double - $45.00",
           "smoke": "Smoke Free",
           "fromDate": "2022-06-23",
           "toDate": "2023-04-03"
@@ -133,7 +133,7 @@
           "garage": "With garage",
           "transit": "Available",
           "type": "office room",
-          "price": "Double",
+          "price": "Double - $45.00",
           "smoke": "Smoke Free",
           "fromDate": "2022-04-25",
           "toDate": "2022-04-30"
