@@ -18,13 +18,13 @@
     <div class="header-right">
         <a href="http://localhost:3005/home">Home</a>
         <a href="http://localhost:3005/searchworkspace">Search Workspace</a>
-     </div>
-<!-- 
+    </div>
+    <!-- 
     <div id="options">
         <a href="http://localhost:3005/home" class="submit">Home</a>
         <a href="http://localhost:3005/searchworkspace" class="submit">Search Workspace</a>        
     </div> -->
-    
+
     <div class="tablediv">
         <table>
             <thead>
@@ -49,15 +49,17 @@
         </table>
     </div>
 
+    <footer>© 2022 by Group 10</footer>
+
 </body>
 <script>
-    function updateView(){
+    function updateView() {
         const fetchResponse = {
-            handleResponse(workspaces){
+            handleResponse(workspaces) {
                 const tbody = document.querySelector('tbody');
                 tbody.innerHTML = "";
                 workspaces.forEach((workspace) => {
-                    
+
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${workspace.workspace_id}</td>
@@ -76,9 +78,9 @@
                 });
             }
         };
-    
+
         fetch("http://localhost:3005/getfilteredworkspaces")
-        .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
                 fetchResponse.handleResponse(data)
             })

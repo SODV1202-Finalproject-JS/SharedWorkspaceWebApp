@@ -17,39 +17,39 @@
 
     <div class="header-right">
         <a href="http://localhost:3005/home">Home</a>
-     </div>
+    </div>
 
     <div id="divBack" class="signupForm2">
         <div>
             <form class="form">
                 <h2>Search Workspace</h2>
                 <h4 id="done"></h4>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="name" class="input" placeholder="Name: ">
                     <label for="name" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="workspace_id" class="input" placeholder="Workspace ID: ">
                     <label for="workspace_id" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="address" class="input" placeholder="Address: ">
                     <label for="address" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="neighborhood" class="input" placeholder="Neighborhood: ">
                     <label for="neighborhood" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainer">
                     <input type="text" name="size" class="input" placeholder="Size (square feet): ">
                     <label for="size" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="garage" name="garage" class="inputOptions" placeholder="Parking garage: ">
                         <option disabled value="" selected>Parking Garage:</option>
@@ -59,7 +59,7 @@
                     </select>
                     <label for="garage" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="transit" name="transit" class="inputOptions" placeholder="Public Transportation: ">
                         <option disabled value="" selected>Public Transportation:</option>
@@ -69,7 +69,7 @@
                     </select>
                     <label for="transit" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="wstype" name="type" class="inputOptions" placeholder="Workspace Type: ">
                         <option disabled value="" selected>Workspace Type:</option>
@@ -81,7 +81,7 @@
                     </select>
                     <label for="wstype" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="price" name="price" class="inputOptions" placeholder="Prices: ">
                         <option disabled value="" selected>Prices Available:</option>
@@ -93,7 +93,7 @@
                     </select>
                     <label for="transit" class="label"></label>
                 </div>
-    
+
                 <div class="inputContainerOptions">
                     <select id="smoke" name="smoke" class="inputOptions" placeholder="Smoker: ">
                         <option disabled value="" selected>Smoker: </option>
@@ -106,7 +106,8 @@
 
                 <div class="inputContainer">
                     <label for="lease" class="label">Lease period: </label>
-                    <input type="date" name="fromDate" max="" id="fromDate" placeholder="Lease Term From:" class="input">
+                    <input type="date" name="fromDate" max="" id="fromDate" placeholder="Lease Term From:"
+                        class="input">
 
                     <input type="date" name="toDate" min="" id="toDate" placeholder="To Date:" class="input">
                     <label class="label"></label>
@@ -114,39 +115,43 @@
                 <br><br><br><br>
                 <div>
                     <div class="BtnsLeft">
-                        <input type="button" class="submit" onclick="location.href='http://localhost:3005/workspacelist'" value="Cancel">
+                        <input type="button" class="submit"
+                            onclick="location.href='http://localhost:3005/workspacelist'" value="Cancel">
                         <input type="submit" value="Search Workspace" class="submit" id="searchWorkspace">
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <footer>© 2022 by Group 10</footer>
+
 </body>
 <script>
-    const form = document.querySelector('.form');   
+    const form = document.querySelector('.form');
 
 
     const httpResponse = {
         handleResponse(response) {
-            if(response.success == true){
+            if (response.success == true) {
                 alert(response.message);
                 window.location.replace("http://localhost:3005/filteredworkspace");
-            }else {
+            } else {
                 alert(response.message);
             }
         }
     }
 
-    form.addEventListener("submit", (e)=> {
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
         const url = "http://localhost:3005/filter";
         const filterWorkspace = {}
-		Array.from(form.elements).forEach((input) => {
-			if(input.value != "" && input.name){
-				filterWorkspace[String(input.name)] = input.value;
-			}
-		});
-		
+        Array.from(form.elements).forEach((input) => {
+            if (input.value != "" && input.name) {
+                filterWorkspace[String(input.name)] = input.value;
+            }
+        });
+
         fetch(url, {
             method: 'POST',
             headers: {
@@ -162,4 +167,5 @@
             })
     });
 </script>
+
 </html>

@@ -106,6 +106,38 @@
         }
       ],
       "password": "88777544545"
+    },
+    {
+      "userID": 5,
+      "name": "Gabriel De Oliveira",
+      "phone": "1234567890",
+      "email": "g.deoliveira131@",
+      "role": "owner",
+      "workspaces": [],
+      "password": "1234"
+    },
+    {
+      "userID": 6,
+      "name": "Gabriel De Oliveira",
+      "phone": "1234567890",
+      "email": "g.deoliveira131@mybvc.ca",
+      "role": "owner",
+      "workspaces": [
+        {
+          "name": "My WS",
+          "workspace_id": "5",
+          "address": "456 4 ave SW",
+          "neighborhood": "Downtown",
+          "size": "201",
+          "garage": "With garage",
+          "transit": "Available",
+          "price": "Double",
+          "smoke": "Smoke Free",
+          "fromDate": "2022-04-25",
+          "toDate": "2022-04-30"
+        }
+      ],
+      "password": "1234"
     }
   ]
 }

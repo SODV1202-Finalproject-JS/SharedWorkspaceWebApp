@@ -45,9 +45,11 @@
         </table>
     </div>
 
+    <footer>© 2022 by Group 10</footer>
+
 </body>
 <script>
-    function removeWorkspace(workspaceIndex){
+    function removeWorkspace(workspaceIndex) {
         fetch("http://localhost:3005/deleteworkspace", {
             method: 'DELETE',
             headers: {
@@ -61,18 +63,18 @@
                 alert(data.message);
             })
             .catch((error) => {
-               alert(error);
+                alert(error);
             })
         updateView();
     }
 
-    function updateView(){
+    function updateView() {
         const fetchResponse = {
-            handleResponse(workspaces){
+            handleResponse(workspaces) {
                 const tbody = document.querySelector('tbody');
                 tbody.innerHTML = "";
                 workspaces.forEach((workspace, index) => {
-                    
+
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${workspace.workspace_id}</td>
@@ -92,9 +94,9 @@
                 });
             }
         };
-    
+
         fetch("http://localhost:3005/getworkspacelist")
-        .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
                 fetchResponse.handleResponse(data)
             })

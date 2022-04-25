@@ -148,12 +148,6 @@ a {
   justify-content: center;
   align-items: center;
   padding-top: 150px;
-
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 150vh; */
 }
 
 table {
@@ -175,16 +169,16 @@ td {
   text-align: center;
 }
 
-tr{
+tr {
   transition: 0.15s;
 }
 
-tr:hover{
+tr:hover {
   background-color: rgb(247, 247, 247);
   cursor: pointer;
 }
 
-/* Test Header */
+/**** Header *****/
 
 .header {
   position: fixed;
@@ -210,3 +204,16 @@ tr:hover{
   cursor: pointer;
 }
 
+/***** Footer *****/
+
+footer {
+  position: fixed;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: rgb(80, 80, 80);
+  font-size: .8em;
+  text-align: center;
+  border-top: 2px solid rgba(128, 128, 128, 0.26);
+}
