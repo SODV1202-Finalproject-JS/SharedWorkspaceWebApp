@@ -115,8 +115,7 @@
                 <br><br><br><br>
                 <div>
                     <div class="BtnsLeft">
-                        <input type="button" class="submit"
-                            onclick="location.href='http://localhost:3005/workspacelist'" value="Cancel">
+                        <a href="http://localhost:3005/home" class="submit">Cancel</a>
                         <input type="submit" value="Search Workspace" class="submit" id="searchWorkspace">
                     </div>
                 </div>
@@ -152,6 +151,9 @@
             }
         });
 
+        if(Object.keys(filterWorkspace).length === 0){
+            filterWorkspace.noFilter = "all";
+        }
         fetch(url, {
             method: 'POST',
             headers: {

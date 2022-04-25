@@ -322,10 +322,10 @@ app.post('/workspacesent', (req, res) => {
 
 //Search workspace area --------
 app.get('/searchworkspace', function (req, res) {
-    if(isLoggedIn()){
+    if(userAuth.userRole == "coworker"){
         res.sendFile(__dirname + "/pages/" + "searchworkspace.html");
     } else {
-        res.redirect("http://localhost:3005/login");
+        res.redirect("http://localhost:3005/home");
     }
 });
 
@@ -338,7 +338,7 @@ const filtered = {
 }
 
 app.post('/filter', function (req, res){
-    if(isLoggedIn()){
+    if(userAuth.userRole == "coworker"){
         usedFilter.filter = req.body;
         const mydata = fs.readFileSync('user_file.json', 'utf8');
         obj = JSON.parse(mydata);
@@ -350,37 +350,47 @@ app.post('/filter', function (req, res){
                 })
             }
         });
-        filtered.workspaces = allWorkspaces.filter((item) =>{
-            for(let key in usedFilter.filter){
-                if(item[key] === undefined || item[key] != usedFilter.filter[key]){
-                    return false;
-                }
-                return true;
+        if(req.body.noFilter == "all"){
+            filtered.workspaces = allWorkspaces;
+            const filterResponse = {
+                success:  true,
+                message: "Showing all found workspaces!" 
             }
-        });
-        const filterResponse = {
-            success: (filtered.workspaces.length < 1) ? false :  true,
-            message: (filtered.workspaces.length < 1) ?  "No workspace found!" : "Workspaces found!" 
+            res.send(filterResponse);
+        } else {
+            filtered.workspaces = allWorkspaces.filter((item) =>{
+                for(let key in usedFilter.filter){
+                    if(item[key] === undefined || item[key] != usedFilter.filter[key]){
+                        return false;
+                    }
+                    return true;
+                }
+            });
+            const filterResponse = {
+                success: (filtered.workspaces.length < 1) ? false :  true,
+                message: (filtered.workspaces.length < 1) ?  "No workspace found!" : "Workspaces found!" 
+            }
+            res.send(filterResponse);
         }
-        res.send(filterResponse);
+
     } else {
-        res.redirect("http://localhost:3005/login");
+        res.redirect("http://localhost:3005/home");
     }
 });
 
 app.get('/getfilteredworkspaces', function (req, res){
-    if(isLoggedIn()){
+    if(userAuth.userRole == "coworker"){
         res.send(filtered.workspaces);
     } else {
-        res.redirect("http://localhost:3005/login");
+        res.redirect("http://localhost:3005/home");
     }
 })
 
 app.get('/filteredworkspace', function(req, res){
-    if(isLoggedIn()){
+    if(userAuth.userRole == "coworker"){
         res.sendFile(__dirname + "/pages/" + "filteredworkspace.html");
     } else {
-        res.redirect("http://localhost:3005/login");
+        res.redirect("http://localhost:3005/home");
     }
 })
 //End search workspace area --------
